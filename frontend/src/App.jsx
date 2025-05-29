@@ -1,13 +1,31 @@
-import { Typography } from "@mui/material";
-function App() {
+import React from 'react';
+
+import '../index.css'
+
+import Sidebar from '../components/common/Sidebar';
+
+export default function App() {
+  const registrarComputador = () => {
+    alert('Ir para tela de registro');
+  };
+
+  const verComputadores = () => {
+    alert('Ir para listagem');
+  };
+
+  const gerenciarUsuario = () => {
+    alert('Ir para cadastro de usuário');
+  };
 
   return (
     <>
-      <Typography variant="h6" fontWeight="bold">
-        Teste
-      </Typography>
-    </>
-  )
-}
+      <Sidebar
+        onRegistrar={registrarComputador}
+        onListar={verComputadores}
+        onGerenciarUsuario={gerenciarUsuario}
+      />
 
-export default App
+      {/* Aqui você pode exibir o Dashboard */}
+    </>
+  );
+}
