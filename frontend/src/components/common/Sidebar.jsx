@@ -38,12 +38,7 @@ const Sidebar = ({ onRegistrar, onListar, onGerenciarUsuario, children }) => {
             >
                 {/* Logo no topo */}
                 <Toolbar sx={{ justifyContent: 'center', }}>
-                    <Box
-                        component="img"
-                        src="../../public/logo_softdevice_transparent.png" 
-                        alt="Logo"
-                        sx={{ width: '100%', maxWidth: '150px', }}
-                    />
+                    <img src="/logo_softdevice_transparent.png" alt="Logo" />
                 </Toolbar>
                 <Box sx={{ overflow: 'auto' }}>
                     <List>
