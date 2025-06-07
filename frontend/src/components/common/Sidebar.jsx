@@ -97,9 +97,7 @@ const Sidebar = ({ onRegistrar, onListar, onGerenciarUsuario, children }) => {
             <Box
                 component="main"
                 sx={{
-                    flexGrow: 1,
-                    p: 3,
-                    mt: 8, // espaço para o AppBar
+                    mt:8, // espaço para o AppBar
                     ml: `${drawerWidth}px`,
                 }}
             >
