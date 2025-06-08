@@ -11,15 +11,22 @@ import {
     Box,
     Paper,
     ListItemIcon,
+    Tooltip,
+    IconButton,
 } from '@mui/material';
 
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 import ComputerOutlinedIcon from '@mui/icons-material/ComputerOutlined';
 import GroupOutlinedIcon from '@mui/icons-material/GroupOutlined';
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+
+import { useAuth } from '../../context/AuthContext';
 
 const drawerWidth = 240;
 
 const Sidebar = ({ onRegistrar, onListar, onGerenciarUsuario, children }) => {
+    const { logout } = useAuth();
+
     return (
         <Box sx={{ display: 'flex' }}>
             {/* Sidebar  */}
@@ -90,10 +97,15 @@ const Sidebar = ({ onRegistrar, onListar, onGerenciarUsuario, children }) => {
                     color: '#000',
                 }}
             >
-                <Toolbar>
+                <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }} >
                     <Typography variant="h6" noWrap>
                         Gerenciador de Computadores
                     </Typography>
+                    <Tooltip title="Sair">
+                    <IconButton color="inherit" onClick={logout}>
+                        <LogoutOutlinedIcon />
+                    </IconButton>
+                </Tooltip>
                 </Toolbar>
             </AppBar>
 
