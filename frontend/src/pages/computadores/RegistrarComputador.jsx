@@ -9,7 +9,6 @@ const RegistrarComputador = () => {
   const [activeStep, setActiveStep] = useState(0);
 
   const [formData, setFormData] = useState({
-    nome: '',
     numero: '',
     processador: '',
     placaVideo: '',
@@ -35,7 +34,7 @@ const RegistrarComputador = () => {
       case 0:
         return (
           <>
-            <TextField size='small' label="Número" name="nome" value={formData.nome} onChange={handleChange} fullWidth />
+            <TextField size='small' label="Número" name="numero" value={formData.numero} onChange={handleChange} fullWidth />
             <Box display={'flex'} gap={2}>
               <TextField size='small' label="Marca" name="marca" value={formData.marca} onChange={handleChange} fullWidth />
               <TextField size='small' label="Modelo" name="modelo" value={formData.modelo} onChange={handleChange} fullWidth />

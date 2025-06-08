@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 
 const authRoutes = require('./routes/authRoutes');
 const computadoresRoutes = require('./routes/computadores/listaComputadores');
+const cadastrarComputadorRoutes = require('./routes/computadores/cadastrarComputador');
 
 dotenv.config();
 
@@ -14,6 +15,7 @@ app.use(express.json());
 // Rotas
 app.use('/api/auth', authRoutes);
 app.use('/api/computadores', computadoresRoutes);
+app.use('/api/registrarcomputador', cadastrarComputadorRoutes);
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
