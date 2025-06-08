@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "marca": "Dell",
+        "modelo": "Inspiron 15",
+        "status": "Ativo"
+    },
+    {
+        "id": 2,
+        "marca": "HP",
+        "modelo": "Pavilion",
+        "status": "Pendente"
+    }
+]
