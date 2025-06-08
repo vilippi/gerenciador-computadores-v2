@@ -1,19 +1,22 @@
-import React, { useState } from 'react';
-import {
-    Box,
-    TextField,
-    Button,
-    Typography,
-    Paper
-} from '@mui/material';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Box, Paper, TextField, Button, Typography } from '@mui/material';
+import { useAuth } from '../context/AuthContext';
 
-const Login = ({ onLogin }) => {
-    const [email, setEmail] = useState('');
-    const [senha, setSenha] = useState('');
+const Login = () => {
+    const { login } = useAuth();
+    const navigate = useNavigate();
 
-    const handleLogin = () => {
-        // futuramente: chamar API aqui
-        onLogin(email, senha);
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+
+    const handleLogin = async () => {
+        try {
+            await login(username, password);
+            navigate('/dashboard');
+        } catch (error) {
+            alert(error.message);
+        }
     };
 
     return (
@@ -23,7 +26,7 @@ const Login = ({ onLogin }) => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                backgroundImage: 'linear-gradient(to top right,rgb(42, 143, 236),rgb(34, 97, 192))',
+                backgroundImage: 'linear-gradient(to top right, rgb(42, 143, 236), rgb(34, 97, 192))',
             }}
         >
             <Paper elevation={3} sx={{ p: 4, width: 300 }}>
@@ -33,21 +36,21 @@ const Login = ({ onLogin }) => {
 
                 <TextField
                     label="Usuário"
-                    type="email"
+                    type="text"
                     fullWidth
-                    size='small'
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    size="small"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
                 />
 
                 <TextField
                     label="Senha"
                     type="password"
                     fullWidth
-                    size='small'
+                    size="small"
                     sx={{ mt: 2 }}
-                    value={senha}
-                    onChange={(e) => setSenha(e.target.value)}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                 />
 
                 <Button

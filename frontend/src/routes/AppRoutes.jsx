@@ -1,37 +1,42 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext.jsx';
+import { useAuth } from '../context/AuthContext';
 
-// Componentes
+// Páginas
 import Login from '../pages/Login';
-import Dashboard from '../pages/Dashboard.jsx';
+import Dashboard from '../pages/Dashboard';
 
 // Layouts
-import SidebarLayout from '../layout/SidebarLayout.jsx';
+import SidebarLayout from '../layout/SidebarLayout';
 
 const AppRoutes = () => {
-    const { isAuthenticated, login } = useAuth();
+  const { isAuthenticated } = useAuth();
 
-    return (
-        <Routes>
-            {!isAuthenticated ? (
-                <Route path="/*" element={<Login onLogin={login} />} />
-            ) : (
-                    <>
-                    <Route element={
-                        <SidebarLayout
-                            onRegistrar={() => console.log('Registrar')}
-                            onListar={() => console.log('Listar')}
-                            onGerenciarUsuario={() => console.log('Usuário')}
-                        />
-                    }>
-                        <Route path="/" element={<Dashboard />} />
-                        <Route path="/computadores" element={<></>} />
-                    </Route>
-                    <Route path="*" element={<Navigate to="/" />} />
-                    </>
-            )}
-        </Routes>
-    );
+  return (
+    <Routes>
+      {!isAuthenticated ? (
+        <>
+          <Route path="/login" element={<Login />} />
+          <Route path="*" element={<Navigate to="/login" />} />
+        </>
+      ) : (
+        <>
+          <Route
+            element={
+              <SidebarLayout
+                onRegistrar={() => console.log('Registrar')}
+                onListar={() => console.log('Listar')}
+                onGerenciarUsuario={() => console.log('Usuário')}
+              />
+            }
+          >
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/computadores" element={<div>Lista de Computadores</div>} />
+          </Route>
+          <Route path="*" element={<Navigate to="/" />} />
+        </>
+      )}
+    </Routes>
+  );
 };
 
 export default AppRoutes;
