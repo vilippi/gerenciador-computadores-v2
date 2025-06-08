@@ -31,14 +31,23 @@ const Sidebar = ({ onRegistrar, onListar, onGerenciarUsuario, children }) => {
                     '& .MuiDrawer-paper': {
                         width: drawerWidth,
                         boxSizing: 'border-box',
-                        backgroundColor: '#1976d2',
+                        backgroundImage: 'linear-gradient(to top left,rgb(42, 143, 236),rgb(34, 97, 192))',
                         color: 'white',
                     },
                 }}
             >
                 {/* Logo no topo */}
                 <Toolbar sx={{ justifyContent: 'center', }}>
-                    <img src="/logo_softdevice_transparent.png" alt="Logo" />
+                    <Box
+                        component="img"
+                        src="/logo_softdevice_transparent.png"
+                        alt="Logo"
+                        sx={{
+                        height: 60, // ou ajuste como quiser: 40, 50...
+                            maxWidth: '80%',
+                            objectFit: 'contain',
+                        }}
+                    />
                 </Toolbar>
                 <Box sx={{ overflow: 'auto' }}>
                     <List>
