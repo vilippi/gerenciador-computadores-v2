@@ -5,11 +5,10 @@ import { Box } from '@mui/material';
 
 
 
-const SidebarLayout = ({ onRegistrar, onGerenciarUsuario }) => {
+const SidebarLayout = ({ onGerenciarUsuario }) => {
     return (
         <>
             <Sidebar
-                onRegistrar={onRegistrar}
                 onGerenciarUsuario={onGerenciarUsuario}
             />
             <Box marginLeft={'240px'}>

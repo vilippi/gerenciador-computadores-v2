@@ -84,7 +84,7 @@ const Sidebar = ({ onRegistrar, onGerenciarUsuario, children }) => {
                             </ListItemButton>
                         </ListItem>
                         <ListItem disablePadding>
-                            <ListItemButton onClick={onRegistrar}>
+                            <ListItemButton onClick={() => navigate('/registrar-computadores')}>
                                 <ListItemIcon>
                                     <AddCircleOutlineOutlinedIcon sx={{ color: 'white' }} />
                                 </ListItemIcon>

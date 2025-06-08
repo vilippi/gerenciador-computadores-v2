@@ -8,6 +8,7 @@ import Dashboard from '../pages/Dashboard';
 // Layouts
 import SidebarLayout from '../layout/SidebarLayout';
 import Computadores from '../pages/computadores/Computadores';
+import RegistrarComputador from '../pages/computadores/RegistrarComputador';
 
 const AppRoutes = () => {
     const { isAuthenticated } = useAuth();
@@ -24,7 +25,6 @@ const AppRoutes = () => {
                     <Route
                         element={
                             <SidebarLayout
-                                onRegistrar={() => console.log('Registrar')}
                                 onListar={() => console.log('Listar')}
                                 onGerenciarUsuario={() => console.log('Usuário')}
                             />
@@ -32,6 +32,7 @@ const AppRoutes = () => {
                     >
                         <Route path="/" element={<Dashboard />} />
                         <Route path="/computadores" element={<Computadores />} />
+                        <Route path="/registrar-computadores" element={<RegistrarComputador />} />
                     </Route>
                     <Route path="*" element={<Navigate to="/" />} />
                 </>
