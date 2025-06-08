@@ -6,7 +6,6 @@ export async function loginRequest(username, password) {
         headers: {
             'Content-Type': 'application/json'
         },
-        // Aqui está o ajuste: deve ser "user", não "username"
         body: JSON.stringify({ user: username, password })
     });
 
