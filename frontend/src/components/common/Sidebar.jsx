@@ -15,17 +15,34 @@ import {
     IconButton,
 } from '@mui/material';
 
+import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+
+
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 import ComputerOutlinedIcon from '@mui/icons-material/ComputerOutlined';
 import GroupOutlinedIcon from '@mui/icons-material/GroupOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 
 import { useAuth } from '../../context/AuthContext';
 
 const drawerWidth = 240;
 
-const Sidebar = ({ onRegistrar, onListar, onGerenciarUsuario, children }) => {
+const Sidebar = ({ onRegistrar, onGerenciarUsuario, children }) => {
+
+    const navigate = useNavigate();
+    
     const { logout } = useAuth();
+
+    const location = useLocation();
+    const routeTitles = {
+        '/': 'Dashboard',
+        '/computadores': 'Computadores Registrados',
+        '/registrar': 'Registrar Computador',
+        '/usuarios': 'Gerenciar Usuários'
+    };
+    const currentTitle = routeTitles[location.pathname] || 'Gerenciador de Computadores';
 
     return (
         <Box sx={{ display: 'flex' }}>
@@ -59,6 +76,14 @@ const Sidebar = ({ onRegistrar, onListar, onGerenciarUsuario, children }) => {
                 <Box sx={{ overflow: 'auto' }}>
                     <List>
                         <ListItem disablePadding>
+                            <ListItemButton onClick={() => navigate('/')}>
+                                <ListItemIcon>
+                                    <HomeOutlinedIcon sx={{ color: 'white' }} />
+                                </ListItemIcon>
+                                <ListItemText primary="Home" />
+                            </ListItemButton>
+                        </ListItem>
+                        <ListItem disablePadding>
                             <ListItemButton onClick={onRegistrar}>
                                 <ListItemIcon>
                                     <AddCircleOutlineOutlinedIcon sx={{ color: 'white' }} />
@@ -67,11 +92,11 @@ const Sidebar = ({ onRegistrar, onListar, onGerenciarUsuario, children }) => {
                             </ListItemButton>
                         </ListItem>
                         <ListItem disablePadding>
-                            <ListItemButton onClick={onListar}>
+                            <ListItemButton onClick={() => navigate('/computadores')}>
                                 <ListItemIcon>
                                     <ComputerOutlinedIcon sx={{ color: 'white' }} />
                                 </ListItemIcon>
-                                <ListItemText primary="Ver Computadores" />
+                                <ListItemText primary="Computadores" />
                             </ListItemButton>
                         </ListItem>
                         <ListItem disablePadding>
@@ -79,7 +104,7 @@ const Sidebar = ({ onRegistrar, onListar, onGerenciarUsuario, children }) => {
                                 <ListItemIcon>
                                     <GroupOutlinedIcon sx={{ color: 'white' }} />
                                 </ListItemIcon>
-                                <ListItemText primary="Gerenciar Usuário" />
+                                <ListItemText primary="Gerenciar Usuários" />
                             </ListItemButton>
                         </ListItem>
                     </List>
@@ -99,7 +124,7 @@ const Sidebar = ({ onRegistrar, onListar, onGerenciarUsuario, children }) => {
             >
                 <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }} >
                     <Typography variant="h6" noWrap>
-                        Gerenciador de Computadores
+                        {currentTitle}
                     </Typography>
                     <Tooltip title="Sair">
                     <IconButton color="inherit" onClick={logout}>

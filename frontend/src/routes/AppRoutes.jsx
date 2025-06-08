@@ -7,6 +7,7 @@ import Dashboard from '../pages/Dashboard';
 
 // Layouts
 import SidebarLayout from '../layout/SidebarLayout';
+import Computadores from '../pages/computadores/Computadores';
 
 const AppRoutes = () => {
     const { isAuthenticated } = useAuth();
@@ -30,7 +31,7 @@ const AppRoutes = () => {
                         }
                     >
                         <Route path="/" element={<Dashboard />} />
-                        <Route path="/computadores" element={<div>Lista de Computadores</div>} />
+                        <Route path="/computadores" element={<Computadores />} />
                     </Route>
                     <Route path="*" element={<Navigate to="/" />} />
                 </>
