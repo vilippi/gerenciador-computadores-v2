@@ -1,11 +1,12 @@
+import { Box } from '@mui/material';
 import React from 'react';
 
 const Dashboard = () => {
     return (
-        <div style={{ padding: '2rem' }}>
+        <Box style={{ padding: 32 }}>
             <h1>🎉 Login realizado com sucesso!</h1>
             <p>Bem-vindo ao Dashboard.</p>
-        </div>
+        </Box>
     );
 };
 
