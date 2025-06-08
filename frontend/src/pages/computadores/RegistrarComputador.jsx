@@ -2,6 +2,7 @@ import {
   Box, Paper, Typography, TextField, Button, Stepper, Step, StepLabel, Stack
 } from '@mui/material';
 import { useState } from 'react';
+import { cadastrarComputador } from '../../services/computadores/registrarComputadorService';
 
 const steps = ['Dados do Computador', 'Especificações Técnicas', 'Antigo Dono'];
 
@@ -9,13 +10,19 @@ const RegistrarComputador = () => {
   const [activeStep, setActiveStep] = useState(0);
 
   const [formData, setFormData] = useState({
-    numero: '',
-    processador: '',
-    placaVideo: '',
-    ram: '',
-    armazenamento: '',
-    antigoDono: '',
-  });
+  numero: '',
+  marca: '',
+  modelo: '',
+  ram: '',
+  armazenamento: '',
+  processador: '',
+  placaVideo: '',
+  antigoDono: '',
+  email: '',
+  setor: '',
+  empresa: '',
+});
+
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -24,10 +31,17 @@ const RegistrarComputador = () => {
   const nextStep = () => setActiveStep((prev) => prev + 1);
   const prevStep = () => setActiveStep((prev) => prev - 1);
 
-  const handleSubmit = () => {
-    console.log('Dados enviados:', formData);
-    // Aqui você faria a chamada à API
-  };
+  const handleSubmit = async () => {
+  try {
+    const token = sessionStorage.getItem('token'); // ou useAuth()
+
+    await cadastrarComputador(formData, token);
+
+    alert('Computador cadastrado com sucesso!');
+  } catch (error) {
+    alert('Erro ao cadastrar: ' + error.message);
+  }
+};
 
   const renderStepContent = () => {
     switch (activeStep) {
