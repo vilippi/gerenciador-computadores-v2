@@ -1,15 +1,8 @@
 
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton, Box, Chip, Stack, Typography, TextField, MenuItem, Button } from '@mui/material';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
-import { useState } from 'react';
-
-const computadoresMock = [
-    { id: 1003, marca: 'Dell', modelo: 'Inspiron 15', status: 'Funcionando' },
-    { id: 1004, marca: 'HP', modelo: 'Pavilion', status: 'No Suporte' },
-    { id: 1005, marca: 'Lenovo', modelo: 'ThinkPad', status: 'No Suporte' },
-    { id: 1006, marca: 'Dell', modelo: 'Inspiron 13', status: 'Precisa de Melhoria' },
-    { id: 1007, marca: 'Sony', modelo: 'Vaio', status: "Mal Funcionamento" }
-];
+import { useEffect, useState } from 'react';
+import { listaComputadores } from '../../services/computadores/listaComputadoresService';
 
 const getStatusChip = (status) => {
     const statusMap = {
@@ -42,6 +35,28 @@ const options = ['ID', 'Marca', 'Modelo', 'Status'];
 
     const Computadores = () => {
 
+        const [computadores, setComputadores] = useState([]);
+
+        useEffect(() => {
+            const carregar = async () => {
+                try {
+                    const dados = await listaComputadores();
+                    setComputadores(dados);
+                } catch (err) {
+                    console.error(err.message);
+                }
+            };
+
+            carregar();
+        }, []);
+
+        const renderStatus = (status) => {
+            const color = status === 'Funcionando' ? 'success' : 'default';
+            return <Chip label={status} color={color} size="small" />;
+        };
+
+
+// Separação Filtros
         const [filtroSelecionado, setFiltroSelecionado] = useState('ID');
         const [valorFiltro, setValorFiltro] = useState('');
         const renderInputField = () => {
@@ -77,6 +92,8 @@ const options = ['ID', 'Marca', 'Modelo', 'Status'];
                 );
             }
         };
+        // Separação Filtros
+
 
         const handleVerEditar = (id) => {
             alert(`Visualizar ou editar computador ID: ${id}`);
@@ -118,7 +135,7 @@ const options = ['ID', 'Marca', 'Modelo', 'Status'];
                 <Table>
                     <TableHead>
                         <TableRow>
-                            <TableCell sx={{fontWeight:'bold'}}>ID</TableCell>
+                            <TableCell sx={{fontWeight:'bold'}}>Número</TableCell>
                             <TableCell sx={{fontWeight:'bold'}}>Marca</TableCell>
                             <TableCell sx={{fontWeight:'bold'}}>Modelo</TableCell>
                             <TableCell sx={{fontWeight:'bold'}}>Status</TableCell>
@@ -126,17 +143,17 @@ const options = ['ID', 'Marca', 'Modelo', 'Status'];
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {computadoresMock.map((pc) => (
+                        {computadores.map((pc) => (
                             <TableRow key={pc.id}>
-                            <TableCell>{pc.id}</TableCell>
-                            <TableCell>{pc.marca}</TableCell>
-                            <TableCell>{pc.modelo}</TableCell>
-                            <TableCell>{getStatusChip(pc.status)}</TableCell>
-                            <TableCell align="center">
-                                <IconButton onClick={() => handleVerEditar(pc.id)}>
-                                    <EditOutlinedIcon />
-                                </IconButton>
-                            </TableCell>
+                                <TableCell>{pc.id}</TableCell>
+                                <TableCell>{pc.marca}</TableCell>
+                                <TableCell>{pc.modelo}</TableCell>
+                                <TableCell>{renderStatus(pc.status)}</TableCell>
+                                <TableCell align="center">
+                                    <IconButton>
+                                        <EditOutlinedIcon />
+                                    </IconButton>
+                                </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>

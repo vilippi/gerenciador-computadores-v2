@@ -3,12 +3,12 @@
         "id": 1,
         "marca": "Dell",
         "modelo": "Inspiron 15",
-        "status": "Ativo"
+        "status": "Funcionando"
     },
     {
         "id": 2,
         "marca": "HP",
         "modelo": "Pavilion",
-        "status": "Pendente"
+        "status": "No Suporte"
     }
 ]
