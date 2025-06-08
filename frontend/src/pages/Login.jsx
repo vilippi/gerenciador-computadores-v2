@@ -23,19 +23,19 @@ const Login = ({ onLogin }) => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                backgroundColor: '#f0f2f5',
+                backgroundImage: 'linear-gradient(to top right,rgb(42, 143, 236),rgb(34, 97, 192))',
             }}
         >
-            <Paper elevation={3} sx={{ p: 4, width: 350 }}>
+            <Paper elevation={3} sx={{ p: 4, width: 300 }}>
                 <Typography variant="h5" mb={2} textAlign="center">
-                    🔐 Login
+                    SoftDevice
                 </Typography>
 
                 <TextField
-                    label="Email"
+                    label="Usuário"
                     type="email"
                     fullWidth
-                    margin="normal"
+                    size='small'
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
@@ -44,7 +44,8 @@ const Login = ({ onLogin }) => {
                     label="Senha"
                     type="password"
                     fullWidth
-                    margin="normal"
+                    size='small'
+                    sx={{ mt: 2 }}
                     value={senha}
                     onChange={(e) => setSenha(e.target.value)}
                 />
