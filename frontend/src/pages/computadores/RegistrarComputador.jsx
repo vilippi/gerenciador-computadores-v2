@@ -1,5 +1,6 @@
 import {
-  Box, Paper, Typography, TextField, Button, Stepper, Step, StepLabel, Stack
+  Box, Paper, Typography, TextField, Button, Stepper, Step, StepLabel, Stack,
+  MenuItem
 } from '@mui/material';
 import { useState } from 'react';
 import { cadastrarComputador } from '../../services/computadores/registrarComputadorService';
@@ -21,6 +22,7 @@ const RegistrarComputador = () => {
   email: '',
   setor: '',
   empresa: '',
+  status: '',
 });
 
 
@@ -48,7 +50,24 @@ const RegistrarComputador = () => {
       case 0:
         return (
           <>
-            <TextField size='small' label="Número" name="numero" value={formData.numero} onChange={handleChange} fullWidth />
+            <Box display={'flex'} gap={2}>
+              <TextField size='small' label="Número" name="numero" value={formData.numero} onChange={handleChange} fullWidth />
+              <TextField
+                select
+                label="Status"
+                name="status"
+                value={formData.status}
+                onChange={handleChange}
+                fullWidth
+                size="small"
+              >
+                  <MenuItem value="Disponível">Disponível</MenuItem>
+                  <MenuItem value="No Suporte">No Suporte</MenuItem>
+                  <MenuItem value="Em Uso">Em Uso</MenuItem>
+                  <MenuItem value="Manutenção">Manutenção</MenuItem>
+                  <MenuItem value="Indísponivel">Indísponivel</MenuItem>
+              </TextField>
+            </Box>
             <Box display={'flex'} gap={2}>
               <TextField size='small' label="Marca" name="marca" value={formData.marca} onChange={handleChange} fullWidth />
               <TextField size='small' label="Modelo" name="modelo" value={formData.modelo} onChange={handleChange} fullWidth />

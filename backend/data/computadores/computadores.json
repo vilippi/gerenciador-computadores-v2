@@ -38,5 +38,20 @@
     "email": "Teste Email",
     "setor": "Teste Setor",
     "empresa": "Teste Empresa"
+  },
+  {
+    "id": 5,
+    "numero": "123456",
+    "marca": "Teste Status",
+    "modelo": "Teste Status",
+    "ram": "Teste Status",
+    "armazenamento": "Teste Status",
+    "processador": "Teste Status",
+    "placaVideo": "Teste Status",
+    "antigoDono": "Teste Status",
+    "email": "Teste Status",
+    "setor": "Teste Status",
+    "empresa": "Teste Status",
+    "status": "Disponível"
   }
 ]
