@@ -1,46 +1,22 @@
 [
   {
     "id": 1,
-    "marca": "Dell",
-    "modelo": "Inspiron 15",
-    "status": "Funcionando"
+    "numero": "12345",
+    "marca": "Sony",
+    "modelo": "Vaio",
+    "ram": 16,
+    "armazenamento": "SSD 512GB",
+    "processador": "Ryzen 7",
+    "placaVideo": "RTX 2050",
+    "antigoDono": "Vitor Lippi",
+    "email": "vitorlippilima.vl@gmail.com",
+    "setor": "TI",
+    "empresa": "Softpark",
+    "status": "Em Uso",
+    "atualdono": "Vitor Lippi Lima"
   },
   {
     "id": 2,
-    "marca": "HP",
-    "modelo": "Pavilion",
-    "status": "No Suporte"
-  },
-  {
-    "id": 3,
-    "antigoDono": "João da Silva",
-    "armazenamento": "512GB SSD",
-    "email": "joao@empresa.com",
-    "empresa": "Empresa X",
-    "marca": "Sony",
-    "modelo": "Vaio",
-    "numero": 1234,
-    "placaVideo": "NVIDIA GTX 1650",
-    "processador": "Intel i7",
-    "ram": 16,
-    "setor": "TI"
-  },
-  {
-    "id": 4,
-    "numero": "12345",
-    "marca": "Teste Marca",
-    "modelo": "Teste Modelo",
-    "ram": "Teste Ram",
-    "armazenamento": "Teste Armazenamento",
-    "processador": "Teste Processador",
-    "placaVideo": "Teste Video",
-    "antigoDono": "Teste Nome",
-    "email": "Teste Email",
-    "setor": "Teste Setor",
-    "empresa": "Teste Empresa"
-  },
-  {
-    "id": 5,
     "numero": "123456",
     "marca": "Teste Status",
     "modelo": "Teste Status",
@@ -52,6 +28,7 @@
     "email": "Teste Status",
     "setor": "Teste Status",
     "empresa": "Teste Status",
-    "status": "Disponível"
+    "status": "Disponível",
+    "atualdono": ""
   }
 ]

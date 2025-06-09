@@ -6,10 +6,11 @@ import { listaComputadores } from '../../services/computadores/listaComputadores
 
 const getStatusChip = (status) => {
     const statusMap = {
-        Funcionando: { label: 'Funcionando', color: '#00e6b8', bg: '#e0fff9' },
+        Disponível: { label: 'Disponível', color: '#00e6b8', bg: '#e0fff9' },
         "No Suporte": { label: 'No Suporte', color: '#ffb300', bg: '#fff3e0' },
-        "Precisa de Melhoria": { label: 'Precisa de Melhoria', color: '#3f51b5', bg: '#e8eaf6' },
-        "Mal Funcionamento": { label: 'Mal Funcionamento', color: '#f44336', bg: '#ffebee' },
+        "Em Uso": { label: 'Em Uso', color: '#3f51b5', bg: '#e8eaf6' },
+        Indisponível: { label: 'Indisponível', color: '#f44336', bg: '#ffebee' },
+        Manutenção: { label: 'Indisponível', color: '#f44336', bg: '#ffebee' },
     };
 
     const s = statusMap[status] || { label: status, color: '#777', bg: '#eee' };
@@ -138,6 +139,7 @@ const options = ['ID', 'Marca', 'Modelo', 'Status'];
                             <TableCell sx={{fontWeight:'bold'}}>Número</TableCell>
                             <TableCell sx={{fontWeight:'bold'}}>Marca</TableCell>
                             <TableCell sx={{fontWeight:'bold'}}>Modelo</TableCell>
+                            <TableCell sx={{fontWeight:'bold'}}>Dono Atual</TableCell>
                             <TableCell sx={{fontWeight:'bold'}}>Status</TableCell>
                             <TableCell sx={{fontWeight:'bold'}} align="center">Ações</TableCell>
                         </TableRow>
@@ -148,7 +150,8 @@ const options = ['ID', 'Marca', 'Modelo', 'Status'];
                                 <TableCell>{pc.id}</TableCell>
                                 <TableCell>{pc.marca}</TableCell>
                                 <TableCell>{pc.modelo}</TableCell>
-                                <TableCell>{renderStatus(pc.status)}</TableCell>
+                                <TableCell>{pc.atualdono}</TableCell>
+                                <TableCell>{getStatusChip(pc.status)}</TableCell>
                                 <TableCell align="center">
                                     <IconButton>
                                         <EditOutlinedIcon />
