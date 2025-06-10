@@ -5,6 +5,8 @@ const dotenv = require('dotenv');
 const authRoutes = require('./routes/authRoutes');
 const computadoresRoutes = require('./routes/computadores/listaComputadores');
 const cadastrarComputadorRoutes = require('./routes/computadores/cadastrarComputador');
+const getComputadoresByIdRoute = require('./routes/computadores/getComputadoresById');
+
 
 dotenv.config();
 
@@ -16,6 +18,7 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/computadores', computadoresRoutes);
 app.use('/api/registrarcomputador', cadastrarComputadorRoutes);
+app.use('/api/computadores', getComputadoresByIdRoute);
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
