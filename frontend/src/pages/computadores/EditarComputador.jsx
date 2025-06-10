@@ -40,9 +40,16 @@ const EditarComputador = () => {
     };
 
     const handleSubmit = async () => {
-        await editarComputador(id, formData);
-        navigate('/computadores');
+        const token = sessionStorage.getItem('token');
+        try {
+            await editarComputador(id, formData, token);
+            navigate('/computadores');
+        } catch (error) {
+            console.error(error.message);
+            alert('Erro ao salvar alterações');
+        }
     };
+
 
     return (
         <Box sx={{ p: 3 }}>
@@ -186,7 +193,7 @@ const EditarComputador = () => {
                         />
                     </Grid>
                 </Grid>
-                <Button type="submit" variant="contained" color="primary">
+                <Button type="submit" variant="contained" color="primary" onClick={handleSubmit}>
                     Salvar
                 </Button>
             </Paper>
