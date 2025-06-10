@@ -23,12 +23,17 @@ const EditarComputador = () => {
     });
 
     useEffect(() => {
-        async function fetchData() {
-            const computador = await getComputadorById(id);
+    async function fetchData() {
+        try {
+            const token = sessionStorage.getItem('token');
+            const computador = await getComputadorById(id, token);
             setFormData(computador);
+        } catch (error) {
+            console.error('Erro ao buscar computador:', error);
         }
-        fetchData();
-    }, [id]);
+    }
+    fetchData();
+}, [id]);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
