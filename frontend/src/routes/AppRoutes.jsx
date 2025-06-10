@@ -9,6 +9,7 @@ import Dashboard from '../pages/Dashboard';
 import SidebarLayout from '../layout/SidebarLayout';
 import Computadores from '../pages/computadores/Computadores';
 import RegistrarComputador from '../pages/computadores/RegistrarComputador';
+import EditarComputador from '../pages/computadores/EditarComputador';
 
 const AppRoutes = () => {
     const { isAuthenticated } = useAuth();
@@ -33,6 +34,7 @@ const AppRoutes = () => {
                         <Route path="/" element={<Dashboard />} />
                         <Route path="/computadores" element={<Computadores />} />
                         <Route path="/registrar-computadores" element={<RegistrarComputador />} />
+                        <Route path="/computadores/editar/:id" element={<EditarComputador />} />
                     </Route>
                     <Route path="*" element={<Navigate to="/" />} />
                 </>

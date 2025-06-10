@@ -3,6 +3,7 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import { useEffect, useState } from 'react';
 import { listaComputadores } from '../../services/computadores/listaComputadoresService';
+import { useNavigate } from 'react-router-dom';
 
 const getStatusChip = (status) => {
     const statusMap = {
@@ -35,6 +36,7 @@ const options = ['ID', 'Marca', 'Modelo', 'Status'];
 
 
     const Computadores = () => {
+        const navigate = useNavigate();
 
         const [computadores, setComputadores] = useState([]);
 
@@ -50,11 +52,6 @@ const options = ['ID', 'Marca', 'Modelo', 'Status'];
 
             carregar();
         }, []);
-
-        const renderStatus = (status) => {
-            const color = status === 'Funcionando' ? 'success' : 'default';
-            return <Chip label={status} color={color} size="small" />;
-        };
 
 
 // Separação Filtros
@@ -94,12 +91,6 @@ const options = ['ID', 'Marca', 'Modelo', 'Status'];
             }
         };
         // Separação Filtros
-
-
-        const handleVerEditar = (id) => {
-            alert(`Visualizar ou editar computador ID: ${id}`);
-            // Aqui você pode navegar para outra rota, por exemplo: navigate(`/computadores/${id}`)
-        };
 
     return (
         <Box style={{ padding: 32 }}>
@@ -153,7 +144,7 @@ const options = ['ID', 'Marca', 'Modelo', 'Status'];
                                 <TableCell>{pc.atualdono}</TableCell>
                                 <TableCell>{getStatusChip(pc.status)}</TableCell>
                                 <TableCell align="center">
-                                    <IconButton>
+                                    <IconButton onClick={() => navigate(`/computadores/editar/${pc.id}`)}>
                                         <EditOutlinedIcon />
                                     </IconButton>
                                 </TableCell>
