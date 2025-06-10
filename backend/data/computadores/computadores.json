@@ -2,8 +2,8 @@
   {
     "id": 1,
     "numero": "12345",
-    "marca": "Sony",
-    "modelo": "Vaio",
+    "marca": "Dell",
+    "modelo": "XPS 13",
     "ram": 16,
     "armazenamento": "SSD 512GB",
     "processador": "Ryzen 7",
