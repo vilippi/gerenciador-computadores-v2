@@ -1,8 +1,10 @@
 
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton, Box, Chip, Stack, Typography, TextField, MenuItem, Button } from '@mui/material';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import { useEffect, useState } from 'react';
 import { listaComputadores } from '../../services/computadores/listaComputadoresService';
+import { deleteComputador } from '../../services/computadores/deletarComputadorService';
 import { useNavigate } from 'react-router-dom';
 
 const getStatusChip = (status) => {
@@ -92,6 +94,24 @@ const options = ['ID', 'Marca', 'Modelo', 'Status'];
         };
         // Separação Filtros
 
+        const handleDelete = async (id) => {
+            const confirm = window.confirm('Tem certeza que deseja excluir este computador?');
+
+                if (confirm) {
+                    try {
+                        const token = sessionStorage.getItem('token');
+                        await deleteComputador(id, token);
+                        alert('Computador excluído com sucesso!');
+                    // Atualizar a lista (por exemplo, refazer o fetch ou filtrar localmente)
+                    const dadosAtualizados = await listaComputadores();
+                    setComputadores(dadosAtualizados);
+                    } catch (error) {
+                        alert(error.message);
+                    }
+                }
+        };
+
+
     return (
         <Box style={{ padding: 32 }}>
             <Paper sx={{ p: 2, mb: 3 }}>
@@ -144,9 +164,14 @@ const options = ['ID', 'Marca', 'Modelo', 'Status'];
                                 <TableCell>{pc.atualDono}</TableCell>
                                 <TableCell>{getStatusChip(pc.status)}</TableCell>
                                 <TableCell align="center">
-                                    <IconButton onClick={() => navigate(`/computadores/editar/${pc.id}`)}>
-                                        <EditOutlinedIcon />
-                                    </IconButton>
+                                    <>
+                                        <IconButton onClick={() => navigate(`/computadores/editar/${pc.id}`)}>
+                                            <EditOutlinedIcon />
+                                        </IconButton>
+                                        <IconButton onClick={() => handleDelete(pc.id)} color="error">
+                                            <DeleteOutlineOutlinedIcon />
+                                        </IconButton>
+                                    </>
                                 </TableCell>
                             </TableRow>
                         ))}

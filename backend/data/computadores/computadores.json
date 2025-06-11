@@ -16,22 +16,6 @@
     "atualDono": "Vitor Lippi Lima"
   },
   {
-    "id": 2,
-    "numero": "123456",
-    "marca": "Dell",
-    "modelo": "Ispiron 15",
-    "ram": 8,
-    "armazenamento": "HD 1TB",
-    "processador": "Teste Status",
-    "placaVideo": "Teste Status",
-    "antigoDono": "Teste Status",
-    "email": "Teste Status",
-    "setor": "Teste Status",
-    "empresa": "Teste Status",
-    "status": "Disponível",
-    "atualdono": ""
-  },
-  {
     "id": 3,
     "numero": "11111",
     "marca": "Dell",
