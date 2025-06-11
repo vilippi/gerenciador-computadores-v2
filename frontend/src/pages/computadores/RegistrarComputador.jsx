@@ -5,25 +5,29 @@ import {
 import { useState } from 'react';
 import { cadastrarComputador } from '../../services/computadores/registrarComputadorService';
 
-const steps = ['Dados do Computador', 'Especificações Técnicas', 'Antigo Dono'];
+const steps = ['Dados do Computador', 'Especificações Técnicas', 'Antigo Dono', 'Dono Atual'];
 
 const RegistrarComputador = () => {
   const [activeStep, setActiveStep] = useState(0);
 
   const [formData, setFormData] = useState({
-  numero: '',
-  marca: '',
-  modelo: '',
-  ram: '',
-  armazenamento: '',
-  processador: '',
-  placaVideo: '',
-  antigoDono: '',
-  email: '',
-  setor: '',
-  empresa: '',
-  status: '',
-});
+    numero: '',
+    marca: '',
+    modelo: '',
+    ram: '',
+    armazenamento: '',
+    processador: '',
+    placaVideo: '',
+    antigoDono: '',
+    emailantigoDono: '',
+    setorantigoDono: '',
+    empresaantigoDono: '',
+    atualDono: '',
+    emailatualDono: '',
+    setoratualDono: '',
+    empresaatualDono: '',
+    status: ''
+  });
 
 
   const handleChange = (e) => {
@@ -91,9 +95,22 @@ const RegistrarComputador = () => {
         return (
           <>
             <TextField size='small' label="Nome" name="antigoDono" value={formData.antigoDono} onChange={handleChange} fullWidth />
-            <TextField size='small' label="Email" name="email" value={formData.email} onChange={handleChange} fullWidth />
-            <TextField size='small' label="Setor" name="setor" value={formData.setor} onChange={handleChange} fullWidth />
-            <TextField size='small' label="Empresa" name="empresa" value={formData.empresa} onChange={handleChange} fullWidth />
+            <TextField size='small' label="Email" name="emailantigoDono" value={formData.emailantigoDono} onChange={handleChange} fullWidth />
+            <Box display={'flex'} gap={2}>
+              <TextField size='small' label="Setor" name="setorantigoDono" value={formData.setorantigoDono} onChange={handleChange} fullWidth />
+              <TextField size='small' label="Empresa" name="empresaantigoDono" value={formData.empresaantigoDono} onChange={handleChange} fullWidth />
+            </Box>
+          </>
+        );
+        case 3:
+        return (
+          <>
+            <TextField size='small' label="Nome" name="atualDono" value={formData.atualDono} onChange={handleChange} fullWidth />
+            <TextField size='small' label="Email" name="emailatualDono" value={formData.emailatualDono} onChange={handleChange} fullWidth />
+            <Box display={'flex'} gap={2}>
+              <TextField size='small' label="Setor" name="setoratualDono" value={formData.setoratualDono} onChange={handleChange} fullWidth />
+              <TextField size='small' label="Empresa" name="empresaatualDono" value={formData.empresaatualDono} onChange={handleChange} fullWidth />
+            </Box>
           </>
         );
       default:

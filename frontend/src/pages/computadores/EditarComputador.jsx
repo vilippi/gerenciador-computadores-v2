@@ -8,17 +8,21 @@ const EditarComputador = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
+        numero: '',
         marca: '',
         modelo: '',
-        numero: '',
-        processador: '',
-        placaVideo: '',
         ram: '',
         armazenamento: '',
+        processador: '',
+        placaVideo: '',
         antigoDono: '',
-        setor: '',
-        email: '',
-        empresa: '',
+        emailantigoDono: '',
+        setorantigoDono: '',
+        empresaantigoDono: '',
+        atualDono: '',
+        emailatualDono: '',
+        setoratualDono: '',
+        empresaatualDono: '',
         status: ''
     });
 
@@ -145,12 +149,43 @@ const EditarComputador = () => {
                     </Grid>
 
                     <Typography variant="body1" fontWeight={'bold'} gutterBottom>
-                        Dados do Atual Dono
+                        Dados do Dono Atual
                     </Typography>
-                    <Grid display={'flex'} gap={2} mt={2}>
-                    </Grid>
-
+                    <TextField
+                        sx={{mt:2}}
+                        size='small'
+                        label="Nome"
+                        name="atualDono"
+                        value={formData.atualDono}
+                        onChange={handleChange}
+                        fullWidth
+                    />
+                    <TextField
+                        sx={{mt:2}}
+                        size='small'
+                        label="E-mail"
+                        name="emailatualDono"
+                        value={formData.emailatualDono}
+                        onChange={handleChange}
+                        fullWidth
+                    />
                     <Grid display={'flex'} gap={2} mt={2} mb={2}>
+                        <TextField
+                            size='small'
+                            label="Setor"
+                            name="setoratualDono"
+                            value={formData.setoratualDono}
+                            onChange={handleChange}
+                            fullWidth
+                        />
+                        <TextField
+                            size='small'
+                            label="Empresa"
+                            name="empresaatualDono"
+                            value={formData.empresaatualDono}
+                            onChange={handleChange}
+                            fullWidth
+                        />
                     </Grid>
 
                     <Typography variant="body1" fontWeight={'bold'} gutterBottom>
@@ -169,8 +204,8 @@ const EditarComputador = () => {
                         sx={{mt:2}}
                         size='small'
                         label="E-mail"
-                        name="email"
-                        value={formData.email}
+                        name="emailantigoDono"
+                        value={formData.emailantigoDono}
                         onChange={handleChange}
                         fullWidth
                     />
@@ -178,16 +213,16 @@ const EditarComputador = () => {
                         <TextField
                             size='small'
                             label="Setor"
-                            name="setor"
-                            value={formData.setor}
+                            name="setorantigoDono"
+                            value={formData.setorantigoDono}
                             onChange={handleChange}
                             fullWidth
                         />
                         <TextField
                             size='small'
                             label="Empresa"
-                            name="empresa"
-                            value={formData.empresa}
+                            name="empresaantigoDono"
+                            value={formData.empresaantigoDono}
                             onChange={handleChange}
                             fullWidth
                         />

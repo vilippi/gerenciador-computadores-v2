@@ -13,7 +13,7 @@
     "setor": "TI",
     "empresa": "Softpark",
     "status": "Em Uso",
-    "atualdono": "Vitor Lippi Lima"
+    "atualDono": "Vitor Lippi Lima"
   },
   {
     "id": 2,
@@ -30,5 +30,24 @@
     "empresa": "Teste Status",
     "status": "Disponível",
     "atualdono": ""
+  },
+  {
+    "id": 3,
+    "numero": "11111",
+    "marca": "Dell",
+    "modelo": "Optiplex 7080",
+    "ram": "16",
+    "armazenamento": "512GB SSD",
+    "processador": "Intel Core i7-10700",
+    "placaVideo": "Intel UHD Graphics 630",
+    "antigoDono": "João Silva Souza",
+    "emailantigoDono": "joao.silva@empresa.com",
+    "setorantigoDono": "Financeiro",
+    "empresaantigoDono": "Softpark",
+    "atualDono": "Marina Souza Cardoso",
+    "emailatualDono": "marina.souza@empresa.com",
+    "setoratualDono": "TI",
+    "empresaatualDono": "Softpark",
+    "status": "Em Uso"
   }
 ]

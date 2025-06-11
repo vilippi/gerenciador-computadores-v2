@@ -141,7 +141,7 @@ const options = ['ID', 'Marca', 'Modelo', 'Status'];
                                 <TableCell>{pc.numero}</TableCell>
                                 <TableCell>{pc.marca}</TableCell>
                                 <TableCell>{pc.modelo}</TableCell>
-                                <TableCell>{pc.atualdono}</TableCell>
+                                <TableCell>{pc.atualDono}</TableCell>
                                 <TableCell>{getStatusChip(pc.status)}</TableCell>
                                 <TableCell align="center">
                                     <IconButton onClick={() => navigate(`/computadores/editar/${pc.id}`)}>
