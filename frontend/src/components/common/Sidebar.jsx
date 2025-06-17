@@ -14,6 +14,7 @@ import {
     Tooltip,
     IconButton,
     Stack,
+    useTheme,
 } from '@mui/material';
 
 import { useNavigate } from 'react-router-dom';
@@ -34,6 +35,9 @@ import { useTema } from '../../context/ThemeContext';
 const drawerWidth = 240;
 
 const Sidebar = ({ onRegistrar, onGerenciarUsuario, children }) => {
+
+    const theme = useTheme();
+    const isDark = theme.palette.mode === 'dark';
 
     const navigate = useNavigate();
     
@@ -61,7 +65,9 @@ const Sidebar = ({ onRegistrar, onGerenciarUsuario, children }) => {
                     '& .MuiDrawer-paper': {
                         width: drawerWidth,
                         boxSizing: 'border-box',
-                        backgroundImage: 'linear-gradient(to top left,rgb(42, 143, 236),rgb(34, 97, 192))',
+                        backgroundImage: isDark
+                            ? 'linear-gradient(to top left,rgb(109, 43, 196),rgb(73, 26, 161))' // gradiente escuro
+                            : 'linear-gradient(to top left, rgb(42, 143, 236), rgb(34, 97, 192))', // gradiente claro
                         color: 'white',
                     },
                 }}
@@ -73,7 +79,7 @@ const Sidebar = ({ onRegistrar, onGerenciarUsuario, children }) => {
                         src="/logo_softdevice_transparent.png"
                         alt="Logo"
                         sx={{
-                        height: 60, // ou ajuste como quiser: 40, 50...
+                        height: 60,
                             maxWidth: '80%',
                             objectFit: 'contain',
                         }}
@@ -124,22 +130,22 @@ const Sidebar = ({ onRegistrar, onGerenciarUsuario, children }) => {
                 sx={{
                     width: `calc(100% - ${drawerWidth}px)`,
                     ml: `${drawerWidth}px`,
-                    backgroundColor: '#fff',
+                    backgroundColor: 'background.default',
                     color: '#000',
                 }}
             >
                 <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }} >
-                    <Typography variant="h6" noWrap>
+                    <Typography variant="h6" noWrap color="text.primary">
                         {currentTitle}
                     </Typography>
                     <Stack display={'flex'} direction={'row'}>
                         <Tooltip title={modoEscuro ? "Modo Claro" : "Modo Escuro"}>
-                            <IconButton onClick={toggleModo}>
+                            <IconButton onClick={toggleModo} >
                                 {modoEscuro ? <LightModeOutlinedIcon /> : <DarkModeOutlinedIcon />}
                             </IconButton>
                         </Tooltip>
                         <Tooltip title="Sair">
-                            <IconButton color="inherit" onClick={logout}>
+                            <IconButton onClick={logout}>
                                 <LogoutOutlinedIcon />
                             </IconButton>
                         </Tooltip>
