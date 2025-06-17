@@ -72,10 +72,15 @@ export const ThemeProvider = ({ children }) => {
             MuiStepIcon: {
                 styleOverrides: {
                     root: ({ theme }) => ({
-                        color: theme.palette.mode === 'dark' ? '#7c4dff' : '#1976d2',
+                    // 👉 Cinza quando está "pendente" (nem ativa nem completa)
+                        color: theme.palette.mode === 'dark' ? '#888888' : '#9e9e9e',
+                        
+                        // Quando a etapa está concluída
                         '&.Mui-completed': {
                             color: theme.palette.primary.main,
                         },
+
+                        // Quando a etapa está ativa
                         '&.Mui-active': {
                             color: theme.palette.primary.main,
                         },
