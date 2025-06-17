@@ -13,6 +13,7 @@ import {
     ListItemIcon,
     Tooltip,
     IconButton,
+    Stack,
 } from '@mui/material';
 
 import { useNavigate } from 'react-router-dom';
@@ -24,8 +25,11 @@ import ComputerOutlinedIcon from '@mui/icons-material/ComputerOutlined';
 import GroupOutlinedIcon from '@mui/icons-material/GroupOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
+import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 
 import { useAuth } from '../../context/AuthContext';
+import { useTema } from '../../context/ThemeContext';
 
 const drawerWidth = 240;
 
@@ -43,6 +47,8 @@ const Sidebar = ({ onRegistrar, onGerenciarUsuario, children }) => {
         '/usuarios': 'Gerenciar Usuários'
     };
     const currentTitle = routeTitles[location.pathname] || 'Gerenciador de Computadores';
+
+    const { modoEscuro, toggleModo } = useTema();
 
     return (
         <Box sx={{ display: 'flex' }}>
@@ -126,11 +132,18 @@ const Sidebar = ({ onRegistrar, onGerenciarUsuario, children }) => {
                     <Typography variant="h6" noWrap>
                         {currentTitle}
                     </Typography>
-                    <Tooltip title="Sair">
-                    <IconButton color="inherit" onClick={logout}>
-                        <LogoutOutlinedIcon />
-                    </IconButton>
-                </Tooltip>
+                    <Stack display={'flex'} direction={'row'}>
+                        <Tooltip title={modoEscuro ? "Modo Claro" : "Modo Escuro"}>
+                            <IconButton onClick={toggleModo}>
+                                {modoEscuro ? <LightModeOutlinedIcon /> : <DarkModeOutlinedIcon />}
+                            </IconButton>
+                        </Tooltip>
+                        <Tooltip title="Sair">
+                            <IconButton color="inherit" onClick={logout}>
+                                <LogoutOutlinedIcon />
+                            </IconButton>
+                        </Tooltip>
+                    </Stack>
                 </Toolbar>
             </AppBar>
 
