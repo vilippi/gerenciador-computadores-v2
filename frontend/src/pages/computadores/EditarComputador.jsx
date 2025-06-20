@@ -16,13 +16,13 @@ const EditarComputador = () => {
         processador: '',
         placaVideo: '',
         antigoDono: '',
-        emailantigoDono: '',
-        setorantigoDono: '',
-        empresaantigoDono: '',
+        emailAntigoDono: '', 
+        setorAntigoDono: '',
+        empresaAntigoDono: '',
         atualDono: '',
-        emailatualDono: '',
-        setoratualDono: '',
-        empresaatualDono: '',
+        emailAtualDono: '',
+        setorAtualDono: '',
+        empresaAtualDono: '',
         status: ''
     });
 
@@ -164,8 +164,8 @@ const EditarComputador = () => {
                         sx={{mt:2}}
                         size='small'
                         label="E-mail"
-                        name="emailatualDono"
-                        value={formData.emailatualDono}
+                        name="emailAtualDono"
+                        value={formData.emailAtualDono}
                         onChange={handleChange}
                         fullWidth
                     />
@@ -173,16 +173,16 @@ const EditarComputador = () => {
                         <TextField
                             size='small'
                             label="Setor"
-                            name="setoratualDono"
-                            value={formData.setoratualDono}
+                            name="setorAtualDono"
+                            value={formData.setorAtualDono}
                             onChange={handleChange}
                             fullWidth
                         />
                         <TextField
                             size='small'
                             label="Empresa"
-                            name="empresaatualDono"
-                            value={formData.empresaatualDono}
+                            name="empresaAtualDono"
+                            value={formData.empresaAtualDono}
                             onChange={handleChange}
                             fullWidth
                         />
@@ -204,8 +204,8 @@ const EditarComputador = () => {
                         sx={{mt:2}}
                         size='small'
                         label="E-mail"
-                        name="emailantigoDono"
-                        value={formData.emailantigoDono}
+                        name="emailAntigoDono"
+                        value={formData.emailAntigoDono}
                         onChange={handleChange}
                         fullWidth
                     />
@@ -213,16 +213,16 @@ const EditarComputador = () => {
                         <TextField
                             size='small'
                             label="Setor"
-                            name="setorantigoDono"
-                            value={formData.setorantigoDono}
+                            name="setorAntigoDono"
+                            value={formData.setorAntigoDono}
                             onChange={handleChange}
                             fullWidth
                         />
                         <TextField
                             size='small'
                             label="Empresa"
-                            name="empresaantigoDono"
-                            value={formData.empresaantigoDono}
+                            name="empresaAntigoDono"
+                            value={formData.empresaAntigoDono}
                             onChange={handleChange}
                             fullWidth
                         />

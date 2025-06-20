@@ -165,10 +165,10 @@ const options = ['ID', 'Marca', 'Modelo', 'Status'];
                                 <TableCell>{getStatusChip(pc.status)}</TableCell>
                                 <TableCell align="center">
                                     <>
-                                        <IconButton onClick={() => navigate(`/computadores/editar/${pc.id}`)} color="primary"> 
+                                        <IconButton onClick={() => navigate(`/computadores/editar/${pc._id}`)} color="primary"> 
                                             <EditOutlinedIcon />
                                         </IconButton>
-                                        <IconButton onClick={() => handleDelete(pc.id)} color="error">
+                                        <IconButton onClick={() => handleDelete(pc._id)} color="error">
                                             <DeleteOutlineOutlinedIcon />
                                         </IconButton>
                                     </>

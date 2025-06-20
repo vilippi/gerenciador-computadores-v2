@@ -19,13 +19,13 @@ const RegistrarComputador = () => {
     processador: '',
     placaVideo: '',
     antigoDono: '',
-    emailantigoDono: '',
-    setorantigoDono: '',
-    empresaantigoDono: '',
+    emailAntigoDono: '', 
+    setorAntigoDono: '',
+    empresaAntigoDono: '',
     atualDono: '',
-    emailatualDono: '',
-    setoratualDono: '',
-    empresaatualDono: '',
+    emailAtualDono: '',
+    setorAtualDono: '',
+    empresaAtualDono: '',
     status: ''
   });
 
@@ -95,10 +95,10 @@ const RegistrarComputador = () => {
         return (
           <>
             <TextField size='small' label="Nome" name="antigoDono" value={formData.antigoDono} onChange={handleChange} fullWidth />
-            <TextField size='small' label="Email" name="emailantigoDono" value={formData.emailantigoDono} onChange={handleChange} fullWidth />
+            <TextField size='small' label="Email" name="emailAntigoDono" value={formData.emailAntigoDono} onChange={handleChange} fullWidth />
             <Box display={'flex'} gap={2}>
-              <TextField size='small' label="Setor" name="setorantigoDono" value={formData.setorantigoDono} onChange={handleChange} fullWidth />
-              <TextField size='small' label="Empresa" name="empresaantigoDono" value={formData.empresaantigoDono} onChange={handleChange} fullWidth />
+              <TextField size='small' label="Setor" name="setorAntigoDono" value={formData.setorAntigoDono} onChange={handleChange} fullWidth />
+              <TextField size='small' label="Empresa" name="empresaAntigoDono" value={formData.empresaAntigoDono} onChange={handleChange} fullWidth />
             </Box>
           </>
         );
@@ -106,10 +106,10 @@ const RegistrarComputador = () => {
         return (
           <>
             <TextField size='small' label="Nome" name="atualDono" value={formData.atualDono} onChange={handleChange} fullWidth />
-            <TextField size='small' label="Email" name="emailatualDono" value={formData.emailatualDono} onChange={handleChange} fullWidth />
+            <TextField size='small' label="Email" name="emailAtualDono" value={formData.emailatualDono} onChange={handleChange} fullWidth />
             <Box display={'flex'} gap={2}>
-              <TextField size='small' label="Setor" name="setoratualDono" value={formData.setoratualDono} onChange={handleChange} fullWidth />
-              <TextField size='small' label="Empresa" name="empresaatualDono" value={formData.empresaatualDono} onChange={handleChange} fullWidth />
+              <TextField size='small' label="Setor" name="setorAtualDono" value={formData.setorAtualDono} onChange={handleChange} fullWidth />
+              <TextField size='small' label="Empresa" name="empresaAtualDono" value={formData.empresaAtualDono} onChange={handleChange} fullWidth />
             </Box>
           </>
         );
