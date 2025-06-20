@@ -1,40 +1,32 @@
 const express = require('express');
-const fs = require('fs');
-const path = require('path');
 const { verificarToken } = require('../../middleware/authMiddleware');
+const Computador = require('../../models/Computador');
 
 const router = express.Router();
 
-router.put('/:id', verificarToken, (req, res) => {
-    const filePath = path.join(__dirname, '../../data/computadores/computadores.json');
+router.put('/:id', verificarToken, async (req, res) => {
     const { id } = req.params;
     const dadosAtualizados = req.body;
 
-    fs.readFile(filePath, 'utf-8', (err, data) => {
-        if (err) {
-            console.error('Erro ao ler JSON:', err);
-            return res.status(500).json({ message: 'Erro ao acessar os dados' });
+    try {
+        const computadorAtualizado = await Computador.findByIdAndUpdate(
+            id,
+            { $set: dadosAtualizados },
+            { new: true, runValidators: true }
+        );
+
+        if (!computadorAtualizado) {
+            return res.status(404).json({ message: 'Computador não encontrado.' });
         }
 
-        let computadores = JSON.parse(data);
-        const index = computadores.findIndex(c => c.id === parseInt(id));
-
-        if (index === -1) {
-            return res.status(404).json({ message: 'Computador não encontrado' });
-        }
-
-        // Atualiza os dados
-        computadores[index] = { ...computadores[index], ...dadosAtualizados };
-
-        fs.writeFile(filePath, JSON.stringify(computadores, null, 2), (err) => {
-            if (err) {
-                console.error('Erro ao salvar JSON:', err);
-                return res.status(500).json({ message: 'Erro ao salvar os dados' });
-            }
-
-            res.json({ message: 'Computador atualizado com sucesso', computador: computadores[index] });
+        res.status(200).json({
+            message: 'Computador atualizado com sucesso no MongoDB.',
+            computador: computadorAtualizado
         });
-    });
+    } catch (error) {
+        console.error('Erro ao atualizar computador:', error);
+        res.status(500).json({ message: 'Erro ao atualizar computador.' });
+    }
 });
 
 module.exports = router;

@@ -1,29 +1,24 @@
 const express = require('express');
-const fs = require('fs');
-const path = require('path');
 const { verificarToken } = require('../../middleware/authMiddleware');
+const Computador = require('../../models/Computador');
 
 const router = express.Router();
 
-router.get('/:id', verificarToken, (req, res) => {
-    const filePath = path.join(__dirname, '../../data/computadores/computadores.json');
+router.get('/:id', verificarToken, async (req, res) => {
     const { id } = req.params;
 
-    fs.readFile(filePath, 'utf-8', (err, data) => {
-        if (err) {
-            console.error('Erro ao ler JSON:', err);
-            return res.status(500).json({ message: 'Erro ao ler os dados' });
-        }
-
-        const computadores = JSON.parse(data);
-        const computador = computadores.find((c) => c.id === parseInt(id));
+    try {
+        const computador = await Computador.findById(id);
 
         if (!computador) {
-            return res.status(404).json({ message: 'Computador não encontrado' });
+            return res.status(404).json({ message: 'Computador não encontrado.' });
         }
 
-        res.json(computador);
-    });
+        res.status(200).json(computador);
+    } catch (error) {
+        console.error('Erro ao buscar computador por ID:', error);
+        res.status(500).json({ message: 'Erro ao buscar computador.' });
+    }
 });
 
 module.exports = router;

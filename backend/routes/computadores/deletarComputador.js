@@ -1,36 +1,24 @@
 const express = require('express');
-const fs = require('fs');
-const path = require('path');
 const { verificarToken } = require('../../middleware/authMiddleware');
+const Computador = require('../../models/Computador');
 
 const router = express.Router();
 
-router.delete('/:id', verificarToken, (req, res) => {
+router.delete('/:id', verificarToken, async (req, res) => {
     const { id } = req.params;
-    const filePath = path.join(__dirname, '../../data/computadores/computadores.json');
 
-    fs.readFile(filePath, 'utf-8', (err, data) => {
-        if (err) {
-            return res.status(500).json({ message: 'Erro ao ler os dados' });
+    try {
+        const resultado = await Computador.findByIdAndDelete(id);
+
+        if (!resultado) {
+            return res.status(404).json({ message: 'Computador não encontrado.' });
         }
 
-        let computadores = JSON.parse(data);
-        const index = computadores.findIndex((c) => c.id === parseInt(id));
-
-        if (index === -1) {
-            return res.status(404).json({ message: 'Computador não encontrado' });
-        }
-
-        computadores.splice(index, 1);
-
-        fs.writeFile(filePath, JSON.stringify(computadores, null, 2), (err) => {
-            if (err) {
-                return res.status(500).json({ message: 'Erro ao excluir computador' });
-            }
-
-            res.json({ message: 'Computador excluído com sucesso' });
-        });
-    });
+        res.status(200).json({ message: 'Computador excluído com sucesso do MongoDB.' });
+    } catch (error) {
+        console.error('Erro ao excluir computador:', error);
+        res.status(500).json({ message: 'Erro ao excluir computador.' });
+    }
 });
 
 module.exports = router;
