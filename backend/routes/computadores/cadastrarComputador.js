@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.post('/', verificarToken, async (req, res) => {
     try {
-        const novoComputador = new Computador(req.body); // <-- MongoDB, não JSON
+        const novoComputador = new Computador(req.body);
         const computadorSalvo = await novoComputador.save(); // <-- Grava no Atlas
 
         res.status(201).json({
