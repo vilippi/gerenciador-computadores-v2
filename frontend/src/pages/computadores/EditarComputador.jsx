@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Box, TextField, Button, Typography, Paper, Stack, MenuItem, Grid } from '@mui/material';
+import { Box, TextField, Button, Typography, Paper, Stack, MenuItem, Grid, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
 import { getComputadorById } from '../../services/computadores/getComputadorById';
 import { editarComputador } from '../../services/computadores/editarComputadorService';
+
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import HistoricoComputador from '../../components/computadores/HistoricoComputador';
 
 const EditarComputador = () => {
     const { id } = useParams();
@@ -56,8 +59,8 @@ const EditarComputador = () => {
 
 
     return (
-        <Box sx={{ p: 3 }}>
-            <Paper sx={{ p: 3, maxWidth: 600, margin: '0 auto' }}>
+        <Box sx={{ p: 3, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <Paper sx={{ p: 3, maxWidth: 600, width: '100%' }}>
                 <Grid>
                     <Typography variant="body1" fontWeight={'bold'} gutterBottom>
                         Dados do Computador
@@ -231,6 +234,17 @@ const EditarComputador = () => {
                 <Button type="submit" variant="contained" color="primary" onClick={handleSubmit}>
                     Salvar
                 </Button>
+            </Paper>
+
+            <Paper sx={{mt:2, maxWidth: 600, width: '100%'}}>
+                <Accordion>
+                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                        <Typography component="span">Histórico</Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        {formData._id && <HistoricoComputador computadorId={formData._id} />}
+                    </AccordionDetails>
+                </Accordion>
             </Paper>
         </Box>
     );
