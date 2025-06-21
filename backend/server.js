@@ -9,6 +9,7 @@ const cadastrarComputadorRoutes = require('./routes/computadores/cadastrarComput
 const getComputadoresByIdRoute = require('./routes/computadores/getComputadoresById');
 const editarComputadorRoute = require('./routes/computadores/editarComputador');
 const deletarComputadorRoutes = require('./routes/computadores/deletarComputador');
+const historicoRoutes = require('./routes/computadores/historicoComputador');
 
 
 
@@ -35,6 +36,7 @@ app.use('/api/registrarcomputador', cadastrarComputadorRoutes);
 app.use('/api/computadores', getComputadoresByIdRoute);
 app.use('/api/editarcomputador', editarComputadorRoute);
 app.use('/api/computadores', deletarComputadorRoutes);
+app.use('/api/historico', historicoRoutes);
 
 
 const PORT = process.env.PORT || 3001;
