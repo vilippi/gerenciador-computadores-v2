@@ -157,7 +157,7 @@ const options = ['ID', 'Marca', 'Modelo', 'Status'];
                     </TableHead>
                     <TableBody>
                         {computadores.map((pc) => (
-                            <TableRow key={pc.id}>
+                            <TableRow key={pc._id}>
                                 <TableCell>{pc.numero}</TableCell>
                                 <TableCell>{pc.marca}</TableCell>
                                 <TableCell>{pc.modelo}</TableCell>

@@ -15,31 +15,47 @@ router.put('/:id', verificarToken, async (req, res) => {
             return res.status(404).json({ message: 'Computador não encontrado.' });
         }
 
-        const computadorAtualizado = await Computador.findByIdAndUpdate(id, novosDados, { new: true });
-
         const alteracoes = [];
         const nomePC = computadorAtual.modelo || 'PC';
-        const donoAntes = computadorAtual.atualDono || 'Sem Dono';
-        const donoDepois = novosDados.atualDono || donoAntes;
-        const statusAntes = computadorAtual.status;
-        const statusDepois = novosDados.status || statusAntes;
 
-        // Mudança de dono
-        if (novosDados.atualDono && novosDados.atualDono !== computadorAtual.atualDono) {
-            alteracoes.push(`${nomePC} / ${donoAntes} / ${statusAntes} → ${nomePC} / ${donoDepois} / ${statusDepois}`);
+        // --- Melhorias técnicas
+        if (novosDados.ram && novosDados.ram !== computadorAtual.ram) {
+            alteracoes.push(`Computador Melhorado!\nRAM ${computadorAtual.ram} -> ${novosDados.ram}`);
         }
 
-        // Mudança de status
+        if (novosDados.armazenamento && novosDados.armazenamento !== computadorAtual.armazenamento) {
+            alteracoes.push(`Computador Melhorado!\nArmazenamento ${computadorAtual.armazenamento} -> ${novosDados.armazenamento}`);
+        }
+
+        // --- Mudança de status
         if (novosDados.status && novosDados.status !== computadorAtual.status) {
-            alteracoes.push(`${nomePC} / ${statusAntes} → ${statusDepois}`);
+            const de = computadorAtual.status;
+            const para = novosDados.status;
+
+            if (de === 'Mal Funcionamento' && para === 'No Suporte') {
+                alteracoes.push('Computador enviado para o Suporte!');
+            } else if (de === 'No Suporte' && para === 'Disponível') {
+                alteracoes.push('Computador Disponível!');
+            } else if (de === 'Em Uso' && para === 'Disponível') {
+                alteracoes.push('Computador Disponível!');
+            } else {
+                alteracoes.push(`${de} -> ${para}`);
+            }
         }
 
-        // Melhorias técnicas
-        ['ram', 'armazenamento', 'processador', 'placaVideo'].forEach((campo) => {
-            if (novosDados[campo] && novosDados[campo] !== computadorAtual[campo]) {
-                alteracoes.push(`${nomePC} / ${campo.toUpperCase()} ${computadorAtual[campo]} → ${novosDados[campo]}`);
+        // --- Mudança de dono
+        if (novosDados.atualDono && novosDados.atualDono !== computadorAtual.atualDono) {
+            const de = computadorAtual.atualDono || 'Sem Dono';
+            const para = novosDados.atualDono;
+
+            if (para === 'Sem Dono') {
+                alteracoes.push('Computador sem dono!');
+            } else {
+                alteracoes.push(`Computador Transferido de ${de} para ${para}!`);
             }
-        });
+        }
+
+        const computadorAtualizado = await Computador.findByIdAndUpdate(id, novosDados, { new: true });
 
         if (alteracoes.length > 0) {
             await Historico.create({
@@ -53,10 +69,10 @@ router.put('/:id', verificarToken, async (req, res) => {
             message: 'Computador atualizado com sucesso.',
             computador: computadorAtualizado
         });
-        } catch (error) {
-            console.error('Erro ao editar computador:', error);
-            res.status(500).json({ message: 'Erro ao editar computador.' });
-        }
-    });
+    } catch (error) {
+        console.error('Erro ao editar computador:', error);
+        res.status(500).json({ message: 'Erro ao editar computador.' });
+    }
+});
 
 module.exports = router;

@@ -239,7 +239,7 @@ const EditarComputador = () => {
             <Paper sx={{mt:2, maxWidth: 600, width: '100%'}}>
                 <Accordion>
                     <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                        <Typography component="span">Histórico</Typography>
+                        <Typography component="span" variant="body1" fontWeight={'bold'} ml={2}>Histórico</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
                         {formData._id && <HistoricoComputador computadorId={formData._id} />}
