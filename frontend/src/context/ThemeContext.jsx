@@ -12,18 +12,18 @@ export const ThemeProvider = ({ children }) => {
         palette: {
             mode: modoEscuro ? "dark" : "light",
             primary: {
-                main: modoEscuro ? "#7c4dff" : "#1976d2", // azul no modo claro
+                main: modoEscuro ? "#7c4dff" : "#1976d2", 
             },
             secondary: {
                 main: modoEscuro ? "#536dfe" : "#2196f3",
             },
             background: {
-                default: modoEscuro ? "#0c1024" : "#fff", // fundo gradiente no claro
+                default: modoEscuro ? "#0c1024" : "#fff", 
                 paper: modoEscuro ? "#1a2035" : "#ffffff",
             },
             text: {
-                primary: modoEscuro ? "#ffffff" : "#000", // texto branco no claro
-                secondary: modoEscuro ? "#a0a8c3" : "#f0f0f0",
+                primary: modoEscuro ? "#ffffff" : "#000", 
+                secondary: modoEscuro ? "#a0a8c3" : "#5c5c5c",
             },
         },
         typography: {

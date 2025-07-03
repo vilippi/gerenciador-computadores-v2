@@ -157,7 +157,7 @@ const RegistrarComputador = () => {
                 onChange={handleChange}
                 fullWidth
               >
-                {['128 GB SSD', '256 GB SSD', '512 GB SSD', '1 TB SSD', '1 TB HD', '2 TB HD'].map((armazenamento) => (
+                {['128 GB SSD', '256 GB SSD', '512 GB SSD', '1 TB SSD', '500 GB HD', '1 TB HD', '2 TB HD'].map((armazenamento) => (
                   <MenuItem key={armazenamento} value={armazenamento}>
                     {armazenamento}
                   </MenuItem>
