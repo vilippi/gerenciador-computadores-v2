@@ -1,13 +1,17 @@
 
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton, Box, Chip, Stack, Typography, TextField, MenuItem, Button } from '@mui/material';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton, Box, Chip, Stack, Typography, TextField, MenuItem, Button, Tooltip } from '@mui/material';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import { useEffect, useState } from 'react';
 import { listaComputadores } from '../../services/computadores/listaComputadoresService';
 import { deleteComputador } from '../../services/computadores/deletarComputadorService';
 import { useNavigate } from 'react-router-dom';
+import { exportarParaExcel } from '../../utils/exportaParaExcel';
+import FileCopyOutlinedIcon from '@mui/icons-material/FileCopyOutlined';
+import RefreshOutlinedIcon from '@mui/icons-material/RefreshOutlined';
 
 const getStatusChip = (status) => {
+
     const statusMap = {
         Disponível: { label: 'Disponível', color: '#00e6b8', bg: '#e0fff9' },
         "No Suporte": { label: 'No Suporte', color: '#ffb300', bg: '#fff3e0' },
@@ -17,7 +21,6 @@ const getStatusChip = (status) => {
     };
 
     const s = statusMap[status] || { label: status, color: '#777', bg: '#eee' };
-
     return (
         <Chip
             label={s.label}
@@ -54,6 +57,15 @@ const options = ['ID', 'Marca', 'Modelo', 'Status'];
 
             carregar();
         }, []);
+
+        const dadosFormatados = computadores.map((pc) => ({
+            Número: pc.numero,
+            Marca: pc.marca,
+            Modelo: pc.modelo,
+            Status: pc.status,
+            AtualDono: pc.atualDono || '',
+            AntigoDono: pc.antigoDono || '',
+        }));
 
 
 // Separação Filtros
@@ -138,6 +150,17 @@ const options = ['ID', 'Marca', 'Modelo', 'Status'];
                         </TextField>
 
                         {renderInputField()}
+                        
+                        <Tooltip title="Atualizar Tabela">
+                            <IconButton onClick={() => listaComputadores}>
+                                <RefreshOutlinedIcon /> 
+                            </IconButton>
+                        </Tooltip>
+                        <Tooltip title="Exportar para Excel (.xlsx)">
+                            <IconButton onClick={() => exportarParaExcel(dadosFormatados, "lista_computadores.xlsx")}>
+                                <FileCopyOutlinedIcon /> 
+                            </IconButton>
+                        </Tooltip>
                     </Stack>
                 </Stack>
             </Paper>
