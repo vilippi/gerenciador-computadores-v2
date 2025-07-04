@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { Card, CardContent, Typography, Box } from '@mui/material';
 import { listaComputadores } from '../../services/computadores/listaComputadoresService';
+import ComputerOutlinedIcon from '@mui/icons-material/ComputerOutlined';
 
 const cores = {
     'disponível': '#2e7d32',
@@ -45,11 +46,14 @@ const CardStatusPie = () => {
     }, []);
 
     return (
-        <Card sx={{ height: 400, mt: 2 }}>
+        <Card sx={{ height: 400, px: 2, mt: 2 }}>
             <CardContent>
-                <Typography variant="h6" gutterBottom>
-                    Computadores por Status
-                </Typography>
+                <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
+                    <ComputerOutlinedIcon sx={{ mr: 1 }} />
+                    <Typography variant="subtitle1" fontWeight="bold">
+                        Computadores por Status
+                    </Typography>
+                </Box>
                 <ResponsiveContainer width="100%" height={300}>
                     <PieChart>
                         <Pie
