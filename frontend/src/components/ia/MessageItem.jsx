@@ -5,7 +5,8 @@ import {
     Typography,
     Avatar,
 } from '@mui/material';
-import { Psychology, Person } from '@mui/icons-material';
+import { Person } from '@mui/icons-material';
+import TipsAndUpdatesOutlinedIcon from '@mui/icons-material/TipsAndUpdatesOutlined';
 
 const MessageItem = ({ message }) => {
     const { text, isAI, images } = message;
@@ -35,7 +36,7 @@ const MessageItem = ({ message }) => {
                         bgcolor: isAI ? 'primary.main' : 'grey.500',
                     }}
                 >
-                    {isAI ? <Psychology fontSize="small" /> : <Person fontSize="small" />}
+                    {isAI ? <TipsAndUpdatesOutlinedIcon fontSize="small" /> : <Person fontSize="small" />}
                 </Avatar>
                 
                 <Paper
