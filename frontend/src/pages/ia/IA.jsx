@@ -170,6 +170,7 @@ const IA = () => {
                             '& .MuiOutlinedInput-root': {
                                 borderRadius: 2,
                             },
+                            mb:1
                         }}
                     />
                 
