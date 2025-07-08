@@ -28,13 +28,14 @@ import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
+import TipsAndUpdatesOutlinedIcon from '@mui/icons-material/TipsAndUpdatesOutlined';
 
 import { useAuth } from '../../context/AuthContext';
 import { useTema } from '../../context/ThemeContext';
 
 const drawerWidth = 240;
 
-const Sidebar = ({ onRegistrar, onGerenciarUsuario, children }) => {
+const Sidebar = ({onGerenciarUsuario, children }) => {
 
     const theme = useTheme();
     const isDark = theme.palette.mode === 'dark';
@@ -117,6 +118,14 @@ const Sidebar = ({ onRegistrar, onGerenciarUsuario, children }) => {
                                     <GroupOutlinedIcon sx={{ color: 'white' }} />
                                 </ListItemIcon>
                                 <ListItemText primary="Gerenciar Usuários" />
+                            </ListItemButton>
+                        </ListItem>
+                        <ListItem disablePadding>
+                            <ListItemButton onClick={() => navigate('/IA')}>
+                                <ListItemIcon>
+                                    <TipsAndUpdatesOutlinedIcon sx={{ color: 'white' }} />
+                                </ListItemIcon>
+                                <ListItemText primary="IA" />
                             </ListItemButton>
                         </ListItem>
                     </List>

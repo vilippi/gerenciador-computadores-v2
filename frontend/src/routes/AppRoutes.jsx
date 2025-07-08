@@ -10,6 +10,7 @@ import SidebarLayout from '../layout/SidebarLayout';
 import Computadores from '../pages/computadores/Computadores';
 import RegistrarComputador from '../pages/computadores/RegistrarComputador';
 import EditarComputador from '../pages/computadores/EditarComputador';
+import IA from '../pages/ia/IA';
 
 const AppRoutes = () => {
     const { isAuthenticated } = useAuth();
@@ -35,6 +36,7 @@ const AppRoutes = () => {
                         <Route path="/computadores" element={<Computadores />} />
                         <Route path="/registrar-computadores" element={<RegistrarComputador />} />
                         <Route path="/computadores/editar/:id" element={<EditarComputador />} />
+                        <Route path="/IA" element={<IA />} />
                     </Route>
                     <Route path="*" element={<Navigate to="/" />} />
                 </>
