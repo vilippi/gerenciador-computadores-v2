@@ -1,94 +1,190 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
-  Box,
-  Typography,
-  TextField,
-  Button,
-  CircularProgress,
-  Paper,
+    Box,
+    Paper,
+    TextField,
+    IconButton,
+    Typography,
+    CircularProgress,
 } from '@mui/material';
+import { Send, AttachFile } from '@mui/icons-material';
+import MessageItem from '../../components/ia/MessageItem';
 
 const IA = () => {
-  const [descricao, setDescricao] = useState('');
-  const [imagem, setImagem] = useState(null);
-  const [respostaIA, setRespostaIA] = useState('');
-  const [loading, setLoading] = useState(false);
 
-  const handleImagemChange = (e) => {
-    setImagem(e.target.files[0]);
-  };
+    const [messages, setMessages] = useState([
+        {
+            id: '1',
+            text: 'Olá! Como posso ajudá-lo hoje?',
+            isAI: true,
+            timestamp: new Date(),
+        },
+    ]);
 
-  const handleEnviar = async () => {
-    setLoading(true);
+    const [inputText, setInputText] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+    const [uploadedImages, setUploadedImages] = useState([]);
+    const messagesEndRef = useRef(null);
+    const fileInputRef = useRef(null);
 
-    const formData = new FormData();
-    formData.append('descricao', descricao);
-    if (imagem) {
-      formData.append('imagem', imagem);
-    }
+    const scrollToBottom = () => {
+        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    };
 
-    try {
-      const res = await fetch('/api/ia/analisar', {
-        method: 'POST',
-        body: formData,
-      });
+    useEffect(() => {
+        scrollToBottom();
+    }, [messages]);
 
-      const data = await res.json();
-      setRespostaIA(data.resposta);
-    } catch (error) {
-      console.error(error);
-      setRespostaIA('Erro ao processar análise.');
-    }
+    const generateAIResponse = (userMessage) => {
+        const responses = [
+            'Entendi sua solicitação. Como posso ajudá-lo mais especificamente?',
+            'Interessante! Vou analisar isso para você.',
+            'Ótima pergunta! Deixe-me pensar na melhor resposta.',
+            'Posso ajudá-lo com isso. Precisa de mais alguma informação?',
+            'Compreendo. Vou processar sua solicitação.',
+        ];
+        return responses[Math.floor(Math.random() * responses.length)];
+    };
 
-    setLoading(false);
-  };
+    const handleSendMessage = async () => {
+        if (!inputText.trim() && uploadedImages.length === 0) return;
 
-  return (
-    <Box sx={{ maxWidth: 600, mx: 'auto', p: 4 }}>
-      <Typography variant="h4" gutterBottom>
-        🤖 Assistente de Manutenção (IA)
-      </Typography>
+        const userMessage = {
+            id: Date.now().toString(),
+            text: inputText,
+            isAI: false,
+            timestamp: new Date(),
+            images: uploadedImages.length > 0 ? [...uploadedImages] : undefined,
+        };
 
-      <TextField
-        label="Descreva o problema"
-        multiline
-        rows={4}
-        fullWidth
-        value={descricao}
-        onChange={(e) => setDescricao(e.target.value)}
-        sx={{ mb: 2 }}
-      />
+        setMessages(prev => [...prev, userMessage]);
+        setInputText('');
+        setUploadedImages([]);
+        setIsLoading(true);
 
-      <Button variant="outlined" component="label" sx={{ mb: 2 }}>
-        Enviar Imagem
-        <input type="file" hidden onChange={handleImagemChange} accept="image/*" />
-      </Button>
+        setTimeout(() => {
+            const aiResponse = {
+                id: (Date.now() + 1).toString(),
+                text: generateAIResponse(inputText),
+                isAI: true,
+                timestamp: new Date(),
+            };
+            setMessages(prev => [...prev, aiResponse]);
+            setIsLoading(false);
+        }, 1000);
+    };
 
-      {imagem && (
-        <Typography variant="body2" sx={{ mb: 2 }}>
-          📎 Imagem selecionada: {imagem.name}
-        </Typography>
-      )}
+    const handleKeyPress = (event) => {
+        if (event.key === 'Enter' && !event.shiftKey) {
+            event.preventDefault();
+            handleSendMessage();
+        }
+    };
 
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={handleEnviar}
-        disabled={loading}
-      >
-        {loading ? <CircularProgress size={24} color="inherit" /> : 'Analisar com IA'}
-      </Button>
+    const handleFileUpload = (event) => {
+        const files = event.target.files;
+        if (files) {
+            Array.from(files).forEach(file => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    if (e.target?.result) {
+                        setUploadedImages(prev => [...prev, e.target.result]);
+                    }
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+    };
 
-      {respostaIA && (
-        <Paper elevation={3} sx={{ mt: 4, p: 2 }}>
-          <Typography variant="h6">🔍 Resultado da IA:</Typography>
-          <Typography variant="body1" sx={{ whiteSpace: 'pre-line' }}>
-            {respostaIA}
-          </Typography>
-        </Paper>
-      )}
-    </Box>
-  );
+    return (
+        <Box style={{ padding: 32 }}>
+            <Paper sx={{ p: 2, mb: 3 }}>
+                {messages.map((message) => (
+                    <MessageItem key={message.id} message={message} />
+                ))}
+                {isLoading && (
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mt: 2 }}>
+                        <CircularProgress size={16} />
+                        <Typography variant="body2" color="text.secondary">
+                            AI está digitando...
+                        </Typography>
+                    </Box>
+                )}
+            </Paper>
+
+            {uploadedImages.length > 0 && (
+                <Paper sx={{ p: 2 }}>
+                    <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
+                        Imagens anexadas:
+                    </Typography>
+                    <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
+                        {uploadedImages.map((image, index) => (
+                            <Box
+                                key={index}
+                                component="img"
+                                src={image}
+                                sx={{
+                                    width: 60,
+                                    height: 60,
+                                    objectFit: 'cover',
+                                    borderRadius: 1,
+                                    border: '1px solid',
+                                    borderColor: 'divider',
+                                }}
+                            />
+                        ))}
+                    </Box>
+                </Paper>
+            )}
+
+            <Paper sx={{ p: 2 }}>
+                <Box sx={{ display: 'flex', gap: 1, alignItems: 'flex-end' }}>
+                    <input
+                        type="file"
+                        ref={fileInputRef}
+                        multiple
+                        accept="image/*"
+                        style={{ display: 'none' }}
+                        onChange={handleFileUpload}
+                    />
+                
+                    <IconButton
+                        size="small"
+                        onClick={() => fileInputRef.current?.click()}
+                        sx={{ mb: 1 }}
+                    >
+                        <AttachFile />
+                    </IconButton>
+                
+                    <TextField
+                        fullWidth
+                        multiline
+                        maxRows={3}
+                        placeholder="Digite sua mensagem..."
+                        value={inputText}
+                        onChange={(e) => setInputText(e.target.value)}
+                        onKeyPress={handleKeyPress}
+                        variant="outlined"
+                        size="small"
+                        sx={{
+                            '& .MuiOutlinedInput-root': {
+                                borderRadius: 2,
+                            },
+                        }}
+                    />
+                
+                    <IconButton
+                        color="primary"
+                        onClick={handleSendMessage}
+                        disabled={!inputText.trim() && uploadedImages.length === 0}
+                        sx={{ mb: 1 }}
+                    >
+                        <Send />
+                    </IconButton>
+                </Box>
+            </Paper>
+        </Box>
+    );
 };
 
 export default IA;

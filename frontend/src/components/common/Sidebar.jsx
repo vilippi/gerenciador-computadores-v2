@@ -49,7 +49,8 @@ const Sidebar = ({onGerenciarUsuario, children }) => {
         '/': 'Dashboard',
         '/computadores': 'Computadores Registrados',
         '/registrar': 'Registrar Computador',
-        '/usuarios': 'Gerenciar Usuários'
+        '/usuarios': 'Gerenciar Usuários',
+        '/IA': 'Assistente Virtual'
     };
     const currentTitle = routeTitles[location.pathname] || 'Gerenciador de Computadores';
 
