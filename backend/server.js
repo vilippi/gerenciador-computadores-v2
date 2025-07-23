@@ -4,12 +4,15 @@ import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 
 import authRoutes from './routes/authRoutes.js';
+
 import computadoresRoutes from './routes/computadores/listaComputadores.js';
 import cadastrarComputadorRoutes from './routes/computadores/cadastrarComputador.js';
 import getComputadoresByIdRoute from './routes/computadores/getComputadoresById.js';
 import editarComputadorRoute from './routes/computadores/editarComputador.js';
 import deletarComputadorRoutes from './routes/computadores/deletarComputador.js';
 import historicoRoutes from './routes/computadores/historicoComputador.js';
+
+import iaRoutes from './routes/ia.js';
 
 dotenv.config();
 
@@ -35,6 +38,8 @@ app.use('/api/computadores', getComputadoresByIdRoute);
 app.use('/api/editarcomputador', editarComputadorRoute);
 app.use('/api/computadores', deletarComputadorRoutes);
 app.use('/api/historico', historicoRoutes);
+
+app.use('/api/ia/analisar', iaRoutes);
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
