@@ -1,12 +1,12 @@
-const express = require('express');
-const { verificarToken } = require('../../middleware/authMiddleware');
-const Computador = require('../../models/Computador'); // model Mongoose
+import express from 'express';
+import { verificarToken } from '../../middleware/authMiddleware.js';
+import Computador from '../../models/Computador.js';
 
 const router = express.Router();
 
 router.get('/', verificarToken, async (req, res) => {
     try {
-        const computadores = await Computador.find(); // ← Busca todos no MongoDB
+        const computadores = await Computador.find();
         res.status(200).json(computadores);
     } catch (error) {
         console.error('Erro ao buscar computadores:', error);
@@ -14,4 +14,4 @@ router.get('/', verificarToken, async (req, res) => {
     }
 });
 
-module.exports = router;
+export default router;

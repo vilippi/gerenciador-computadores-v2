@@ -1,6 +1,6 @@
-const express = require('express');
-const { verificarToken } = require('../../middleware/authMiddleware');
-const Computador = require('../../models/Computador');
+import express from 'express';
+import { verificarToken } from '../../middleware/authMiddleware.js';
+import Computador from '../../models/Computador.js';
 
 const router = express.Router();
 
@@ -21,4 +21,4 @@ router.delete('/:id', verificarToken, async (req, res) => {
     }
 });
 
-module.exports = router;
+export default router;

@@ -1,13 +1,13 @@
-const express = require('express');
-const { verificarToken } = require('../../middleware/authMiddleware');
-const Computador = require('../../models/Computador'); // <- Mongoose model
+import express from 'express';
+import { verificarToken } from '../../middleware/authMiddleware.js';
+import Computador from '../../models/Computador.js';
 
 const router = express.Router();
 
 router.post('/', verificarToken, async (req, res) => {
     try {
         const novoComputador = new Computador(req.body);
-        const computadorSalvo = await novoComputador.save(); // <-- Grava no Atlas
+        const computadorSalvo = await novoComputador.save();
 
         res.status(201).json({
             message: 'Computador cadastrado com sucesso no MongoDB.',
@@ -19,4 +19,4 @@ router.post('/', verificarToken, async (req, res) => {
     }
 });
 
-module.exports = router;
+export default router;

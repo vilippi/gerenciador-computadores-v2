@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const historicoSchema = new mongoose.Schema({
     computadorId: {
@@ -19,4 +19,5 @@ const historicoSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('HistoricoComputador', historicoSchema);
+const Historico = mongoose.model('HistoricoComputador', historicoSchema);
+export default Historico;

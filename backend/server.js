@@ -1,17 +1,15 @@
-const express = require('express');
-const cors = require('cors');
-const dotenv = require('dotenv');
-const mongoose = require('mongoose');
+import express from 'express';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import mongoose from 'mongoose';
 
-const authRoutes = require('./routes/authRoutes');
-const computadoresRoutes = require('./routes/computadores/listaComputadores');
-const cadastrarComputadorRoutes = require('./routes/computadores/cadastrarComputador');
-const getComputadoresByIdRoute = require('./routes/computadores/getComputadoresById');
-const editarComputadorRoute = require('./routes/computadores/editarComputador');
-const deletarComputadorRoutes = require('./routes/computadores/deletarComputador');
-const historicoRoutes = require('./routes/computadores/historicoComputador');
-
-
+import authRoutes from './routes/authRoutes.js';
+import computadoresRoutes from './routes/computadores/listaComputadores.js';
+import cadastrarComputadorRoutes from './routes/computadores/cadastrarComputador.js';
+import getComputadoresByIdRoute from './routes/computadores/getComputadoresById.js';
+import editarComputadorRoute from './routes/computadores/editarComputador.js';
+import deletarComputadorRoutes from './routes/computadores/deletarComputador.js';
+import historicoRoutes from './routes/computadores/historicoComputador.js';
 
 dotenv.config();
 
@@ -37,7 +35,6 @@ app.use('/api/computadores', getComputadoresByIdRoute);
 app.use('/api/editarcomputador', editarComputadorRoute);
 app.use('/api/computadores', deletarComputadorRoutes);
 app.use('/api/historico', historicoRoutes);
-
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {

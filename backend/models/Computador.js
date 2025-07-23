@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose'; // ← ESSENCIAL, e precisa estar na primeira linha!
 
 const computadorSchema = new mongoose.Schema({
     numero: String,
@@ -19,4 +19,5 @@ const computadorSchema = new mongoose.Schema({
     empresaAtualDono: String,
 }, { timestamps: true });
 
-module.exports = mongoose.model('Computador', computadorSchema);
+const Computador = mongoose.model('Computador', computadorSchema);
+export default Computador;

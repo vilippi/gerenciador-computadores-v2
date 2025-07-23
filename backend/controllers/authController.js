@@ -1,7 +1,7 @@
-const jwt = require('jsonwebtoken');
-const Usuario = require('../models/Usuario');
+import jwt from 'jsonwebtoken';
+import Usuario from '../models/Usuario.js';
 
-exports.login = async (req, res) => {
+export async function login(req, res) {
     const { user, password } = req.body;
 
     if (!user || !password) {
@@ -30,4 +30,4 @@ exports.login = async (req, res) => {
         console.error('Erro no login:', err);
         res.status(500).json({ message: 'Erro interno ao tentar logar.' });
     }
-};
+}

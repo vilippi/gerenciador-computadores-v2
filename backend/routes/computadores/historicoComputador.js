@@ -1,6 +1,6 @@
-const express = require('express');
-const { verificarToken } = require('../../middleware/authMiddleware');
-const Historico = require('../../models/HistoricoComputador');
+import express from 'express';
+import { verificarToken } from '../../middleware/authMiddleware.js';
+import Historico from '../../models/HistoricoComputador.js';
 
 const router = express.Router();
 
@@ -17,4 +17,4 @@ router.get('/:computadorId', verificarToken, async (req, res) => {
     }
 });
 
-module.exports = router;
+export default router;

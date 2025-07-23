@@ -1,7 +1,7 @@
-const express = require('express');
-const { verificarToken } = require('../../middleware/authMiddleware');
-const Computador = require('../../models/Computador');
-const Historico = require('../../models/HistoricoComputador');
+import express from 'express';
+import { verificarToken } from '../../middleware/authMiddleware.js';
+import Computador from '../../models/Computador.js';
+import Historico from '../../models/HistoricoComputador.js';
 
 const router = express.Router();
 
@@ -18,7 +18,7 @@ router.put('/:id', verificarToken, async (req, res) => {
         const alteracoes = [];
         const nomePC = computadorAtual.modelo || 'PC';
 
-        // --- Melhorias técnicas
+        // Melhorias técnicas
         if (novosDados.ram && novosDados.ram !== computadorAtual.ram) {
             alteracoes.push(`Computador Melhorado!\nRAM ${computadorAtual.ram} -> ${novosDados.ram}`);
         }
@@ -27,7 +27,7 @@ router.put('/:id', verificarToken, async (req, res) => {
             alteracoes.push(`Computador Melhorado!\nArmazenamento ${computadorAtual.armazenamento} -> ${novosDados.armazenamento}`);
         }
 
-        // --- Mudança de status
+        // Mudança de status
         if (novosDados.status && novosDados.status !== computadorAtual.status) {
             const de = computadorAtual.status;
             const para = novosDados.status;
@@ -43,7 +43,7 @@ router.put('/:id', verificarToken, async (req, res) => {
             }
         }
 
-        // --- Mudança de dono
+        // Mudança de dono
         if (novosDados.atualDono && novosDados.atualDono !== computadorAtual.atualDono) {
             const de = computadorAtual.atualDono || 'Sem Dono';
             const para = novosDados.atualDono;
@@ -75,4 +75,4 @@ router.put('/:id', verificarToken, async (req, res) => {
     }
 });
 
-module.exports = router;
+export default router;
