@@ -8,6 +8,8 @@ import {
 import { Person } from '@mui/icons-material';
 import TipsAndUpdatesOutlinedIcon from '@mui/icons-material/TipsAndUpdatesOutlined';
 
+import ReactMarkdown from 'react-markdown';
+
 const MessageItem = ({ message }) => {
     const { text, isAI, images } = message;
 
@@ -72,7 +74,7 @@ const MessageItem = ({ message }) => {
                             ))}
                         </Box>
                     )}
-                    <Typography variant="body2">{text}</Typography>
+                    <ReactMarkdown>{message.text}</ReactMarkdown>
                 </Paper>
             </Box>
         </Box>

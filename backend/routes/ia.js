@@ -23,6 +23,8 @@ router.post('/', async (req, res) => {
             config: {
                 thinkingConfig: {
                     thinkingBudget: 0,
+                    systemInstruction: "Você é um assistente técnico especializado em diagnóstico e manutenção de hardware de computadores.",
+                    temperature: 0.5,
                 },
             },
         });

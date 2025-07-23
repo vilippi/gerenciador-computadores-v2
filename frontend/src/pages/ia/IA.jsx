@@ -82,19 +82,21 @@ const IA = () => {
 
     return (
         <Box style={{ padding: 32 }}>
-            <Paper sx={{ p: 2, mb: 3 }}>
-                {messages.map((message) => (
-                    <MessageItem key={message.id} message={message} />
-                ))}
-                {isLoading && (
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mt: 2 }}>
-                        <CircularProgress size={16} />
-                        <Typography variant="body2" color="text.secondary">
-                            IA está digitando...
-                        </Typography>
-                    </Box>
-                )}
-                <div ref={messagesEndRef} />
+            <Paper sx={{ p: 2, mb: 3, height: '360px', overflowY: 'auto' }}>
+                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                    {messages.map((message) => (
+                        <MessageItem key={message.id} message={message} />
+                    ))}
+                    {isLoading && (
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                            <CircularProgress size={16} />
+                            <Typography variant="body2" color="text.secondary">
+                                IA está digitando...
+                            </Typography>
+                        </Box>
+                    )}
+                    <div ref={messagesEndRef} />
+                </Box>
             </Paper>
 
             <Paper sx={{ p: 2 }}>
