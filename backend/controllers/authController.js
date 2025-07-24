@@ -19,8 +19,13 @@ export async function login(req, res) {
             return res.status(401).json({ message: 'Senha incorreta.' });
         }
 
+        // ✅ Agora incluindo o role no payload do token
         const token = jwt.sign(
-            { id: usuario._id, user: usuario.user },
+            {
+                id: usuario._id,
+                user: usuario.user,
+                role: usuario.role // 👈 ESSENCIAL
+            },
             process.env.JWT_SECRET,
             { expiresIn: '2h' }
         );

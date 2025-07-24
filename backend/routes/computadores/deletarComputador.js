@@ -1,10 +1,11 @@
 import express from 'express';
 import { verificarToken } from '../../middleware/authMiddleware.js';
+import { verificarPermissao } from '../../middleware/verificarPermissao.js';
 import Computador from '../../models/Computador.js';
 
 const router = express.Router();
 
-router.delete('/:id', verificarToken, async (req, res) => {
+router.delete('/:id', verificarToken, verificarPermissao(['admin']), async (req, res) => {
     const { id } = req.params;
 
     try {

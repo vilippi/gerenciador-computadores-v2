@@ -1,10 +1,11 @@
 import express from 'express';
 import { verificarToken } from '../../middleware/authMiddleware.js';
+import { verificarPermissao } from '../../middleware/verificarPermissao.js';
 import Computador from '../../models/Computador.js';
 
 const router = express.Router();
 
-router.post('/', verificarToken, async (req, res) => {
+router.post('/', verificarToken, verificarPermissao(['admin', 'tecnico']), async (req, res) => {
     try {
         const novoComputador = new Computador(req.body);
         const computadorSalvo = await novoComputador.save();

@@ -3,7 +3,12 @@ import bcrypt from 'bcrypt';
 
 const usuarioSchema = new mongoose.Schema({
     user: { type: String, required: true, unique: true },
-    password: { type: String, required: true }
+    password: { type: String, required: true },
+    role: {
+        type: String,
+        enum: ['admin', 'tecnico', 'visualizador'],
+        default: 'visualizador'
+    }
 });
 
 // Antes de salvar, criptografa a senha se for nova ou modificada

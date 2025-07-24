@@ -1,10 +1,11 @@
 import express from 'express';
 import { verificarToken } from '../../middleware/authMiddleware.js';
+import { verificarPermissao } from '../../middleware/verificarPermissao.js';
 import Computador from '../../models/Computador.js';
 
 const router = express.Router();
 
-router.get('/:id', verificarToken, async (req, res) => {
+router.get('/:id', verificarToken, verificarPermissao(['admin', 'tecnico', 'visualizador']), async (req, res) => {
     const { id } = req.params;
 
     try {

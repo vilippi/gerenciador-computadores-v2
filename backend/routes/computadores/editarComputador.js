@@ -1,11 +1,12 @@
 import express from 'express';
 import { verificarToken } from '../../middleware/authMiddleware.js';
+import { verificarPermissao } from '../../middleware/verificarPermissao.js';
 import Computador from '../../models/Computador.js';
 import Historico from '../../models/HistoricoComputador.js';
 
 const router = express.Router();
 
-router.put('/:id', verificarToken, async (req, res) => {
+router.put('/:id', verificarToken, verificarPermissao(['admin', 'tecnico']), async (req, res) => {
     const { id } = req.params;
     const novosDados = req.body;
 
