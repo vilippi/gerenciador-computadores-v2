@@ -1,5 +1,5 @@
 
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton, Box, Chip, Stack, Typography, TextField, MenuItem, Button, Tooltip } from '@mui/material';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton, Box, Chip, Stack, Typography, TextField, MenuItem, Button, Tooltip, TablePagination } from '@mui/material';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import { useEffect, useState } from 'react';
@@ -124,6 +124,26 @@ const options = ['ID', 'Marca', 'Modelo', 'Status'];
         };
 
 
+        // Estados da paginação
+        const [page, setPage] = useState(0);
+        const [rowsPerPage, setRowsPerPage] = useState(5);
+
+        // Cálculo dos itens visíveis
+        const computadoresVisiveis = computadores.slice(
+            page * rowsPerPage,
+            page * rowsPerPage + rowsPerPage
+        );
+
+        // Handlers de paginação
+        const handleChangePage = (event, newPage) => {
+            setPage(newPage);
+        };
+
+        const handleChangeRowsPerPage = (event) => {
+            setRowsPerPage(parseInt(event.target.value, 10));
+            setPage(0); // Voltar para a primeira página
+        };
+
     return (
         <Box style={{ padding: 32 }}>
             <Paper sx={{ p: 2, mb: 3 }}>
@@ -166,20 +186,20 @@ const options = ['ID', 'Marca', 'Modelo', 'Status'];
             </Paper>
 
 
-            <TableContainer component={Paper}>
-                <Table>
-                    <TableHead>
+            <TableContainer component={Paper} sx={{ maxHeight: 400, overflowY: 'auto' }}>
+                <Table stickyHeader>
+                    <TableHead> 
                         <TableRow>
-                            <TableCell sx={{fontWeight:'bold'}}>Número</TableCell>
-                            <TableCell sx={{fontWeight:'bold'}}>Marca</TableCell>
-                            <TableCell sx={{fontWeight:'bold'}}>Modelo</TableCell>
-                            <TableCell sx={{fontWeight:'bold'}}>Dono Atual</TableCell>
-                            <TableCell sx={{fontWeight:'bold'}}>Status</TableCell>
-                            <TableCell sx={{fontWeight:'bold'}} align="center">Ações</TableCell>
+                            <TableCell sx={{ fontWeight: 'bold' }}>Número</TableCell>
+                            <TableCell sx={{ fontWeight: 'bold' }}>Marca</TableCell>
+                            <TableCell sx={{ fontWeight: 'bold' }}>Modelo</TableCell>
+                            <TableCell sx={{ fontWeight: 'bold' }}>Dono Atual</TableCell>
+                            <TableCell sx={{ fontWeight: 'bold' }}>Status</TableCell>
+                            <TableCell sx={{ fontWeight: 'bold' }} align="center">Ações</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {computadores.map((pc) => (
+                        {computadoresVisiveis.map((pc) => (
                             <TableRow key={pc._id}>
                                 <TableCell>{pc.numero}</TableCell>
                                 <TableCell>{pc.marca}</TableCell>
@@ -187,20 +207,33 @@ const options = ['ID', 'Marca', 'Modelo', 'Status'];
                                 <TableCell>{pc.atualDono}</TableCell>
                                 <TableCell>{getStatusChip(pc.status)}</TableCell>
                                 <TableCell align="center">
-                                    <>
-                                        <IconButton onClick={() => navigate(`/computadores/editar/${pc._id}`)} color="primary"> 
-                                            <EditOutlinedIcon />
-                                        </IconButton>
-                                        <IconButton onClick={() => handleDelete(pc._id)} color="error">
-                                            <DeleteOutlineOutlinedIcon />
-                                        </IconButton>
-                                    </>
+                                    <IconButton onClick={() => navigate(`/computadores/editar/${pc._id}`)} color="primary">
+                                        <EditOutlinedIcon />
+                                    </IconButton>
+                                    <IconButton onClick={() => handleDelete(pc._id)} color="error">
+                                        <DeleteOutlineOutlinedIcon />
+                                    </IconButton>
                                 </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
                 </Table>
+
+                {/* Paginação */}
+                <TablePagination
+                    component="div"
+                    count={computadores.length}
+                    page={page}
+                    onPageChange={handleChangePage}
+                    rowsPerPage={rowsPerPage}
+                    onRowsPerPageChange={handleChangeRowsPerPage}
+                    labelRowsPerPage="Linhas por página:"
+                    labelDisplayedRows={({ from, to, count }) => `${from}-${to} de ${count}`}
+                    rowsPerPageOptions={[5, 10, 25, 50]}
+                />
             </TableContainer>
+
+            
         </ Box>
     );
 };
