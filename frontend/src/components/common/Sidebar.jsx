@@ -89,62 +89,62 @@ const Sidebar = ({onGerenciarUsuario, children }) => {
                 </Toolbar>
                 <Box sx={{ overflow: 'auto' }}>
                     <List>
-  {/* Home - visível para todos */}
-  <ListItem disablePadding>
-    <ListItemButton onClick={() => navigate('/')}>
-      <ListItemIcon>
-        <HomeOutlinedIcon sx={{ color: 'white' }} />
-      </ListItemIcon>
-      <ListItemText primary="Home" />
-    </ListItemButton>
-  </ListItem>
+                        {/* Home - visível para todos */}
+                        <ListItem disablePadding>
+                            <ListItemButton onClick={() => navigate('/')}>
+                                <ListItemIcon>
+                                    <HomeOutlinedIcon sx={{ color: 'white' }} />
+                                </ListItemIcon>
+                                <ListItemText primary="Home" />
+                            </ListItemButton>
+                        </ListItem>
 
-  {/* Registrar PC - apenas admin e técnico */}
-  {(role === 'admin' || role === 'tecnico') && (
-    <ListItem disablePadding>
-      <ListItemButton onClick={() => navigate('/registrar-computadores')}>
-        <ListItemIcon>
-          <AddCircleOutlineOutlinedIcon sx={{ color: 'white' }} />
-        </ListItemIcon>
-        <ListItemText primary="Registrar PC" />
-      </ListItemButton>
-    </ListItem>
-  )}
+                        {/* Registrar PC - apenas admin e técnico */}
+                        {(role === 'admin' || role === 'tecnico') && (
+                            <ListItem disablePadding>
+                                <ListItemButton onClick={() => navigate('/registrar-computadores')}>
+                                    <ListItemIcon>
+                                        <AddCircleOutlineOutlinedIcon sx={{ color: 'white' }} />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Registrar PC" />
+                                </ListItemButton>
+                            </ListItem>
+                        )}
 
-  {/* Computadores - visível para todos */}
-  <ListItem disablePadding>
-    <ListItemButton onClick={() => navigate('/computadores')}>
-      <ListItemIcon>
-        <ComputerOutlinedIcon sx={{ color: 'white' }} />
-      </ListItemIcon>
-      <ListItemText primary="Computadores" />
-    </ListItemButton>
-  </ListItem>
+                        {/* Computadores - visível para todos */}
+                        <ListItem disablePadding>
+                            <ListItemButton onClick={() => navigate('/computadores')}>
+                                <ListItemIcon>
+                                    <ComputerOutlinedIcon sx={{ color: 'white' }} />
+                                </ListItemIcon>
+                                <ListItemText primary="Computadores" />
+                            </ListItemButton>
+                        </ListItem>
 
-  {/* Gerenciar Usuários - apenas admin */}
-  {role === 'admin' && (
-    <ListItem disablePadding>
-      <ListItemButton onClick={onGerenciarUsuario}>
-        <ListItemIcon>
-          <GroupOutlinedIcon sx={{ color: 'white' }} />
-        </ListItemIcon>
-        <ListItemText primary="Gerenciar Usuários" />
-      </ListItemButton>
-    </ListItem>
-  )}
+                        {/* Gerenciar Usuários - apenas admin */}
+                        {role === 'admin' && (
+                            <ListItem disablePadding>
+                                <ListItemButton onClick={onGerenciarUsuario}>
+                                    <ListItemIcon>
+                                        <GroupOutlinedIcon sx={{ color: 'white' }} />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Gerenciar Usuários" />
+                                </ListItemButton>
+                            </ListItem>
+                        )}
 
-  {/* IA - apenas admin e técnico */}
-  {(role === 'admin' || role === 'tecnico') && (
-    <ListItem disablePadding>
-      <ListItemButton onClick={() => navigate('/IA')}>
-        <ListItemIcon>
-          <TipsAndUpdatesOutlinedIcon sx={{ color: 'white' }} />
-        </ListItemIcon>
-        <ListItemText primary="IA" />
-      </ListItemButton>
-    </ListItem>
-  )}
-</List>
+                        {/* IA - apenas admin e técnico */}
+                        {(role === 'admin' || role === 'tecnico') && (
+                            <ListItem disablePadding>
+                                <ListItemButton onClick={() => navigate('/IA')}>
+                                    <ListItemIcon>
+                                        <TipsAndUpdatesOutlinedIcon sx={{ color: 'white' }} />
+                                    </ListItemIcon>
+                                    <ListItemText primary="IA" />
+                                </ListItemButton>
+                            </ListItem>
+                        )}
+                    </List>
                 </Box>
             </Drawer>
 
@@ -155,7 +155,7 @@ const Sidebar = ({onGerenciarUsuario, children }) => {
                 sx={{
                     width: `calc(100% - ${drawerWidth}px)`,
                     ml: `${drawerWidth}px`,
-                    backgroundColor: 'background.default',
+                    backgroundColor: 'background.header',
                     color: '#000',
                 }}
             >

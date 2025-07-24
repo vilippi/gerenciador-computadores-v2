@@ -1,7 +1,8 @@
 import express from 'express';
 import { GoogleGenAI  } from '@google/genai';
-import { verificarPermissao } from '../middleware/verificarPermissao.js';
 import dotenv from 'dotenv';
+import { verificarToken } from '../middleware/authMiddleware.js';
+import { verificarPermissao } from '../middleware/verificarPermissao.js';
 
 dotenv.config();
 const router = express.Router();
@@ -10,7 +11,7 @@ const ai = new GoogleGenAI({
     apiKey: process.env.GEMINI_API_KEY,
 });
 
-router.post('/', verificarPermissao(['admin', 'tecnico']), async (req, res) => {
+router.post('/',verificarToken, verificarPermissao(['admin', 'tecnico']), async (req, res) => {
     const { prompt } = req.body;
 
     if (!prompt) {

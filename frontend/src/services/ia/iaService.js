@@ -1,8 +1,13 @@
 export const enviarPromptParaIA = async (prompt) => {
+    const token = sessionStorage.getItem('token'); // ou localStorage
+
     try {
         const response = await fetch('http://localhost:3001/api/ia/analisar', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}` // ✅ Adiciona o token aqui
+            },
             body: JSON.stringify({ prompt }),
         });
 

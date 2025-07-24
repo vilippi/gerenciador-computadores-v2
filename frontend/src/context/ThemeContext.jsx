@@ -18,8 +18,9 @@ export const ThemeProvider = ({ children }) => {
                 main: modoEscuro ? "#536dfe" : "#2196f3",
             },
             background: {
-                default: modoEscuro ? "#0c1024" : "#fff", 
+                default: modoEscuro ? "#0c1024" : "#f1f1f1ff",
                 paper: modoEscuro ? "#1a2035" : "#ffffff",
+                header: modoEscuro ? "#1a2035" : "#ffffff",
             },
             text: {
                 primary: modoEscuro ? "#ffffff" : "#000", 
@@ -72,7 +73,7 @@ export const ThemeProvider = ({ children }) => {
             MuiStepIcon: {
                 styleOverrides: {
                     root: ({ theme }) => ({
-                    // 👉 Cinza quando está "pendente" (nem ativa nem completa)
+                    //"pendente" (nem ativa nem completa)
                         color: theme.palette.mode === 'dark' ? '#888888' : '#9e9e9e',
                         
                         // Quando a etapa está concluída
